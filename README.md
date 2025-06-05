@@ -164,22 +164,6 @@ CovY propose une approche holistique de la sécurité du télétravail :
 
 ## 🛠️ Technologies
 
-### Frontend
-- **Framework** : React 18 + Next.js 14
-- **Language** : TypeScript 5.0
-- **UI** : Tailwind CSS + Radix UI
-- **State** : Zustand + React Query
-- **Charts** : Recharts + D3.js
-- **Animation** : Framer Motion + GSAP
-
-### Backend
-- **Runtime** : Node.js 20 LTS
-- **Framework** : Express + Fastify
-- **Language** : TypeScript + Python
-- **Auth** : JWT + OAuth 2.0
-- **API** : GraphQL + REST
-- **Queue** : Bull + Apache Kafka
-
 ### Infrastructure
 - **Container** : Docker + Kubernetes
 - **Cloud** : AWS/Azure/GCP compatible
@@ -194,87 +178,6 @@ CovY propose une approche holistique de la sécurité du télétravail :
 - **Secrets** : HashiCorp Vault
 - **Scanning** : SonarQube + Snyk
 - **Pentest** : OWASP ZAP + Burp
-
-## 🚀 Installation
-
-### Prérequis
-
-- Node.js 20+ et npm/yarn
-- Docker et Docker Compose
-- Kubernetes cluster (production)
-- PostgreSQL 15+
-- Redis 7+
-
-### Installation locale (développement)
-
-```bash
-# Cloner le repository
-git clone https://github.com/covy-security/covy-platform.git
-cd covy-platform
-
-# Installer les dépendances
-npm install
-
-# Configuration de l'environnement
-cp .env.example .env
-# Éditer .env avec vos paramètres
-
-# Lancer les services Docker
-docker-compose up -d
-
-# Migrations de base de données
-npm run migrate
-
-# Lancer en mode développement
-npm run dev
-```
-
-### Déploiement production
-
-```bash
-# Build des images Docker
-docker build -t covy/platform:latest .
-
-# Déployer sur Kubernetes
-kubectl apply -f k8s/
-
-# Vérifier le déploiement
-kubectl get pods -n covy-system
-```
-
-## ⚙️ Configuration
-
-### Configuration minimale `.env`
-
-```env
-# Application
-NODE_ENV=production
-APP_URL=https://app.covy-security.com
-API_URL=https://api.covy-security.com
-
-# Sécurité
-JWT_SECRET=your-super-secret-key
-ENCRYPTION_KEY=your-encryption-key
-SESSION_SECRET=your-session-secret
-
-# Base de données
-DATABASE_URL=postgresql://user:pass@localhost:5432/covy
-REDIS_URL=redis://localhost:6379
-
-# Services externes
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_USER=notifications@covy-security.com
-SMTP_PASS=your-smtp-password
-
-# IA/ML
-ML_API_URL=https://ml.covy-security.com
-ML_API_KEY=your-ml-api-key
-
-# Monitoring
-SENTRY_DSN=https://xxx@sentry.io/xxx
-PROMETHEUS_ENDPOINT=http://localhost:9090
-```
 
 ## 📚 Documentation
 
@@ -342,10 +245,8 @@ PROMETHEUS_ENDPOINT=http://localhost:9090
 
 ### Équipe core
 
-- **Sarah Chen** - Head of Security Engineering
-- **Marco Rossi** - Lead AI/ML Engineer
-- **Elena Volkov** - VP Product
-- **James Wilson** - Head of Customer Success
+- **Adel Bouachraoui Bourjaillat** - CEO
+- **Caulin Leroy ** - Lead AI/ML Engineer
 
 ## 📞 Contact
 
