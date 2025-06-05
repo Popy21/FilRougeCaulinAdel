@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CovY - Documentation Conformité & Sécurité</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Cov<span>Y</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#problem">Problématique</a></li>
+                <li><a href="index.html#solution">Solution</a></li>
+                <li><a href="index.html#features">Technologie</a></li>
+                <li><a href="docs.html">Centre Doc.</a></li>
+
+                <li><a href="index.html#documentation" class="active">Documentation</a></li>
+                <li><a href="index.html#timeline">Roadmap</a></li>
+                <li><a href="ecommerce-pro.html" class="btn">Démo Privée</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" style="min-height: 50vh; padding: 8rem 0;">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">DOCUMENTATION COMPLÈTE</div>
+                <h1 class="hero-title">Centre de <span>Documentation</span></h1>
+                <p class="hero-text">Accédez à l'ensemble de nos politiques de sécurité, plans de continuité et documentations de conformité réglementaire pour sécuriser votre transformation digitale.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Navigation -->
+    <section id="documentation" style="padding-top: 2rem;">
+        <div class="doc-bg"></div>
+        <div class="container">
+            <div class="doc-navigation">
+                <div class="doc-nav-tabs">
+                    <button class="doc-tab active" data-tab="pssi">PSSI</button>
+                    <button class="doc-tab" data-tab="pca">PCA</button>
+                    <button class="doc-tab" data-tab="pra">PRA</button>
+                    <button class="doc-tab" data-tab="gdpr">GDPR</button>
+                    <button class="doc-tab" data-tab="pgi">PGI</button>
+                    <button class="doc-tab" data-tab="dpia">DPIA</button>
+                </div>
+            </div>
+
+            <div class="doc-content">
+                <!-- PSSI Tab -->
+                <div class="doc-panel active" id="pssi">
+                    <div class="section-header">
+                        <div class="section-subtitle">POLITIQUE DE SÉCURITÉ</div>
+                        <h2 class="section-title">PSSI - Politique de Sécurité des Systèmes d'Information</h2>
+                        <p class="section-description">Cadre global de gouvernance pour garantir la sécurité, l'intégrité et la disponibilité des systèmes d'information dans le contexte du télétravail.</p>
+                    </div>
+
+                    <!-- Vue d'ensemble et contexte -->
+                    <div class="doc-grid" style="margin-bottom: 3rem;">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-info-circle"></i>
+                                <h3>Contexte & Enjeux</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="security-matrix">
+                                    <div class="security-domain">
+                                        <h4>Contexte Réglementaire</h4>
+                                        <ul>
+                                            <li>Conformité RGPD (UE 2016/679)</li>
+                                            <li>Directive NIS 2 - Cybersécurité</li>
+                                            <li>ISO 27001:2022 - Management de la sécurité</li>
+                                            <li>Framework NIST Cybersecurity</li>
+                                            <li>ANSSI - Guides et recommandations</li>
+                                        </ul>
+                                    </div>
+                                    <div class="security-domain">
+                                        <h4>Enjeux Télétravail</h4>
+                                        <ul>
+                                            <li>Extension du périmètre de sécurité</li>
+                                            <li>Multiplication des points d'accès</li>
+                                            <li>Diversité des environnements utilisateurs</li>
+                                            <li>Gestion des données hors site</li>
+                                            <li>Maintien de la productivité sécurisée</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Objectifs & Périmètre</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="security-matrix">
+                                    <div class="security-domain">
+                                        <h4>Objectifs Stratégiques</h4>
+                                        <ul>
+                                            <li>Protéger les actifs informationnels critiques</li>
+                                            <li>Garantir la confidentialité des données sensibles</li>
+                                            <li>Assurer la disponibilité 24/7 des services</li>
+                                            <li>Maintenir l'intégrité des systèmes</li>
+                                            <li>Traçabilité complète des accès et actions</li>
+                                        </ul>
+                                    </div>
+                                    <div class="security-domain">
+                                        <h4>Périmètre d'Application</h4>
+                                        <ul>
+                                            <li>Tous les SI de l'entreprise (on-premise & cloud)</li>
+                                            <li>Ensemble des collaborateurs et prestataires</li>
+                                            <li>Dispositifs personnels (BYOD) et professionnels</li>
+                                            <li>Données de catégories A, B et C</li>
+                                            <li>Partenaires et fournisseurs critiques</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gouvernance et organisation -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">1. Gouvernance & Organisation</h3>
+                    </div>
+
+                    <div class="problem-grid" style="margin-top: 2rem;">
+                        <div class="problem-card">
+                            <i class="fas fa-users-cog"></i>
+                            <h3>Comité de Sécurité SI</h3>
+                            <p><strong>Composition:</strong> DG, RSSI, DSI, DPO, Risk Manager, Responsables métiers</p>
+                            <p><strong>Fréquence:</strong> Mensuelle + réunions exceptionnelles si incident majeur</p>
+                            <p><strong>Missions:</strong> Validation stratégie, arbitrage budgétaire, suivi KPIs, gestion de crise</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-user-shield"></i>
+                            <h3>RSSI - Responsable SSI</h3>
+                            <p><strong>Rattachement:</strong> Direction Générale (indépendance DSI)</p>
+                            <p><strong>Autorité:</strong> Pouvoir de blocage sur projets non conformes</p>
+                            <p><strong>Équipe:</strong> 3 analystes sécurité + 2 architectes + SOC externalisé</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-project-diagram"></i>
+                            <h3>Organisation Opérationnelle</h3>
+                            <p><strong>SOC:</strong> Supervision 24/7 externalisée niveau 1, interne niveau 2-3</p>
+                            <p><strong>CERT:</strong> Équipe dédiée gestion incidents (4 experts)</p>
+                            <p><strong>Correspondants:</strong> 1 référent sécurité par département</p>
+                        </div>
+                    </div>
+
+                    <!-- Mesures organisationnelles détaillées -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">2. Mesures Organisationnelles</h3>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-clipboard-list"></i>
+                                <h3>Gestion des Ressources Humaines</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="deployment-steps">
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">A</span>
+                                            <h4>Recrutement & Intégration</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Vérification des antécédents (postes sensibles)</li>
+                                            <li>Clause de confidentialité dans contrats</li>
+                                            <li>Formation sécurité obligatoire J+1</li>
+                                            <li>Signature charte informatique et télétravail</li>
+                                            <li>Attribution profil d'accès selon matrice RACI</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">B</span>
+                                            <h4>Gestion des Mouvements</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Processus JML (Joiner-Mover-Leaver) automatisé</li>
+                                            <li>Revue trimestrielle des droits d'accès</li>
+                                            <li>Désactivation immédiate compte si départ</li>
+                                            <li>Récupération matériel sous 24h</li>
+                                            <li>Effacement sécurisé des données locales</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-file-contract"></i>
+                                <h3>Gestion des Tiers</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="compliance-frameworks">
+                                    <div class="framework">
+                                        <h4>Contractualisation Sécurisée</h4>
+                                        <div class="compliance-controls">
+                                            <div class="control">
+                                                <span class="control-id">CT-01</span>
+                                                <span class="control-desc">Clauses sécurité obligatoires</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">CT-02</span>
+                                                <span class="control-desc">Audit sécurité fournisseurs critiques</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">CT-03</span>
+                                                <span class="control-desc">SLA sécurité avec pénalités</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">CT-04</span>
+                                                <span class="control-desc">Plan d'assurance sécurité (PAS)</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mesures techniques approfondies -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">3. Mesures Techniques Détaillées</h3>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-key"></i>
+                                <h3>Gestion des Identités & Accès (IAM)</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="architecture-diagram">
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Authentification Forte</div>
+                                        <div class="layer-components">
+                                            <div class="component">MFA obligatoire (TOTP/FIDO2)</div>
+                                            <div class="component">SSO SAML 2.0 centralisé</div>
+                                            <div class="component">Passwordless pour VIP</div>
+                                            <div class="component">Biométrie mobile</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Gestion des Privilèges</div>
+                                        <div class="layer-components">
+                                            <div class="component">PAM (CyberArk/Delinea)</div>
+                                            <div class="component">Just-In-Time Access</div>
+                                            <div class="component">Approval Workflow</div>
+                                            <div class="component">Session Recording</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Provisioning Automatisé</div>
+                                        <div class="layer-components">
+                                            <div class="component">AD/Azure AD Sync</div>
+                                            <div class="component">SCIM 2.0 Protocol</div>
+                                            <div class="component">Role Mining AI</div>
+                                            <div class="component">Attestation Campaigns</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="config-examples" style="margin-top: 2rem;">
+                                    <h4>Configuration Politique de Mots de Passe</h4>
+                                    <div class="config-block">
+                                        <strong>Exigences minimales:</strong>
+                                        <pre>
+{
+  "password_policy": {
+    "minimum_length": 14,
+    "complexity": {
+      "uppercase": 2,
+      "lowercase": 2,
+      "numbers": 2,
+      "special_chars": 2
+    },
+    "history": 12,
+    "max_age_days": 90,
+    "min_age_days": 1,
+    "lockout_threshold": 5,
+    "lockout_duration_min": 30,
+    "dictionary_check": true,
+    "personal_info_check": true
+  }
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-network-wired"></i>
+                                <h3>Sécurité Réseau & Télétravail</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="deployment-steps">
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">1</span>
+                                            <h4>Architecture Zero Trust</h4>
+                                        </div>
+                                        <ul>
+                                            <li><strong>ZTNA:</strong> Zscaler Private Access / Palo Alto Prisma</li>
+                                            <li><strong>Micro-segmentation:</strong> Illumio / Guardicore</li>
+                                            <li><strong>Policy Engine:</strong> Règles contextuelles (lieu, device, heure)</li>
+                                            <li><strong>Continuous Verification:</strong> Réévaluation toutes les 10 min</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">2</span>
+                                            <h4>VPN Sécurisé Entreprise</h4>
+                                        </div>
+                                        <ul>
+                                            <li><strong>Protocol:</strong> OpenVPN 2.5+ avec tls-crypt-v2</li>
+                                            <li><strong>Chiffrement:</strong> AES-256-GCM + SHA512</li>
+                                            <li><strong>Certificats:</strong> PKI interne + renouvellement auto</li>
+                                            <li><strong>Kill Switch:</strong> Obligatoire sur tous les clients</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">3</span>
+                                            <h4>Segmentation Réseau</h4>
+                                        </div>
+                                        <ul>
+                                            <li><strong>VLAN Télétravail:</strong> 172.16.100.0/24 isolé</li>
+                                            <li><strong>ACL strictes:</strong> Deny all + allow spécifique</li>
+                                            <li><strong>IPS/IDS:</strong> Snort/Suricata inline mode</li>
+                                            <li><strong>Proxy filtrant:</strong> Catégories web + SSL inspection</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Protection des endpoints -->
+                    <div class="solution-grid" style="margin-top: 3rem;">
+                        <div class="solution-card">
+                            <div class="solution-number">EDR</div>
+                            <h3>Protection Endpoint Avancée</h3>
+                            <p><strong>Solution:</strong> CrowdStrike Falcon / Microsoft Defender for Endpoint</p>
+                            <p><strong>Fonctionnalités:</strong> Détection comportementale ML, Threat Hunting proactif, Rollback ransomware, IOC automatique</p>
+                            <p><strong>Politique:</strong> Blocage USB, App Control, Full disk encryption BitLocker/FileVault</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="solution-number">DLP</div>
+                            <h3>Data Loss Prevention</h3>
+                            <p><strong>Solution:</strong> Forcepoint DLP / Symantec DLP</p>
+                            <p><strong>Canaux surveillés:</strong> Email, Web, Cloud Storage, Removable Media, Network shares</p>
+                            <p><strong>Règles:</strong> Classification auto, Watermarking, Blocage patterns (CC, SSN, etc.)</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="solution-number">MDM</div>
+                            <h3>Mobile Device Management</h3>
+                            <p><strong>Solution:</strong> Microsoft Intune / VMware Workspace ONE</p>
+                            <p><strong>Politiques:</strong> Conteneurisation apps, VPN auto, Remote wipe, Compliance check</p>
+                            <p><strong>BYOD:</strong> Séparation profil perso/pro, MAM sélectif</p>
+                        </div>
+                    </div>
+
+                    <!-- Chiffrement et PKI -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">4. Cryptographie & PKI</h3>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-lock"></i>
+                                <h3>Standards de Chiffrement</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="tech-specs">
+                                    <h4>Algorithmes Approuvés</h4>
+                                    <ul>
+                                        <li><strong>Symétrique:</strong> AES-256-GCM (préféré), AES-256-CBC, ChaCha20-Poly1305</li>
+                                        <li><strong>Asymétrique:</strong> RSA-4096 (legacy), ECC P-384, Ed25519 (moderne)</li>
+                                        <li><strong>Hachage:</strong> SHA-512, SHA3-512, BLAKE2b</li>
+                                        <li><strong>KDF:</strong> PBKDF2 (100k iterations min), Argon2id, scrypt</li>
+                                        <li><strong>Quantique-résistant:</strong> CRYSTALS-Kyber (KEX), CRYSTALS-Dilithium (signatures)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="config-examples" style="margin-top: 2rem;">
+                                    <h4>Configuration OpenSSL Recommandée</h4>
+                                    <pre>
+# Cipher suite moderne (TLS 1.3 only)
+TLS_AES_256_GCM_SHA384
+TLS_CHACHA20_POLY1305_SHA256
+TLS_AES_128_GCM_SHA256
+
+# Legacy support (TLS 1.2)
+ECDHE-ECDSA-AES256-GCM-SHA384
+ECDHE-RSA-AES256-GCM-SHA384
+ECDHE-ECDSA-CHACHA20-POLY1305
+ECDHE-RSA-CHACHA20-POLY1305
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-certificate"></i>
+                                <h3>Infrastructure PKI</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="architecture-diagram">
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Root CA (Offline)</div>
+                                        <div class="layer-components">
+                                            <div class="component">HSM FIPS 140-2 L3</div>
+                                            <div class="component">Air-gapped vault</div>
+                                            <div class="component">20 ans validité</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Intermediate CAs</div>
+                                        <div class="layer-components">
+                                            <div class="component">User Certificates CA</div>
+                                            <div class="component">Device Certificates CA</div>
+                                            <div class="component">Code Signing CA</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Services PKI</div>
+                                        <div class="layer-components">
+                                            <div class="component">OCSP Responder HA</div>
+                                            <div class="component">CRL Distribution</div>
+                                            <div class="component">Auto-enrollment</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gestion des vulnérabilités -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">5. Gestion des Vulnérabilités</h3>
+                    </div>
+
+                    <div class="monitoring-dashboard">
+                        <div class="metric-group">
+                            <h4>Programme de Patch Management</h4>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-name">Patches Critiques</span>
+                                    <span class="metric-value">< 24h</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Patches Importants</span>
+                                    <span class="metric-value">< 7 jours</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Couverture Scan</span>
+                                    <span class="metric-value">100%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">MTTR Vulns</span>
+                                    <span class="metric-value">< 48h</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doc-grid" style="margin-top: 2rem;">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-search-plus"></i>
+                                <h3>Scanning & Detection</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="hunting-queries">
+                                    <h4>Outils de Scanning</h4>
+                                    <div class="query-example">
+                                        <strong>Infrastructure:</strong>
+                                        <ul style="color: #94a3b8; margin-top: 0.5rem;">
+                                            <li>Nessus Professional - Scan hebdomadaire complet</li>
+                                            <li>Qualys VMDR - Scan continu externe</li>
+                                            <li>OpenVAS - Scan quotidien interne</li>
+                                        </ul>
+                                    </div>
+                                    <div class="query-example">
+                                        <strong>Applications:</strong>
+                                        <ul style="color: #94a3b8; margin-top: 0.5rem;">
+                                            <li>Burp Suite Enterprise - DAST continu</li>
+                                            <li>SonarQube - SAST dans CI/CD</li>
+                                            <li>Snyk - Dépendances open source</li>
+                                            <li>GitLab SAST - Secrets scanning</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-tools"></i>
+                                <h3>Remediation Process</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="deployment-steps">
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">1</span>
+                                            <h4>Priorisation CVSS</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Critical (9.0-10.0): Remediation immédiate</li>
+                                            <li>High (7.0-8.9): Sous 7 jours</li>
+                                            <li>Medium (4.0-6.9): Sous 30 jours</li>
+                                            <li>Low (0.1-3.9): Prochain cycle</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">2</span>
+                                            <h4>Validation</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Test en environnement de pré-production</li>
+                                            <li>Validation par équipe métier</li>
+                                            <li>Rollback plan documenté</li>
+                                            <li>Communication utilisateurs</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Surveillance et logging -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">6. Surveillance & Journalisation</h3>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>Architecture SIEM</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="cloud-diagram">
+                                    <div class="cloud-region">
+                                        <h4>Sources de Logs</h4>
+                                        <div class="cloud-services">
+                                            <div class="service">Windows Events</div>
+                                            <div class="service">Linux Syslog</div>
+                                            <div class="service">Network Devices</div>
+                                            <div class="service">Applications</div>
+                                            <div class="service">Cloud Platforms</div>
+                                            <div class="service">Security Tools</div>
+                                        </div>
+                                    </div>
+                                    <div class="cloud-region">
+                                        <h4>Processing Pipeline</h4>
+                                        <div class="cloud-services">
+                                            <div class="service">Logstash/Fluentd</div>
+                                            <div class="service">Kafka Streaming</div>
+                                            <div class="service">Enrichment Engine</div>
+                                            <div class="service">ML Analytics</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="config-examples" style="margin-top: 2rem;">
+                                    <h4>Politique de Rétention</h4>
+                                    <pre>
+{
+  "retention_policy": {
+    "security_events": {
+      "hot_storage": "90_days",
+      "warm_storage": "365_days",
+      "cold_archive": "7_years"
+    },
+    "access_logs": {
+      "hot_storage": "30_days",
+      "warm_storage": "180_days",
+      "cold_archive": "3_years"
+    },
+    "compliance_logs": {
+      "immutable": true,
+      "retention": "10_years",
+      "encryption": "AES256"
+    }
+  }
+}
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-bell"></i>
+                                <h3>Corrélation & Alerting</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="alerting-system">
+                                    <h4>Règles de Corrélation Critiques</h4>
+                                    <div class="alert-levels">
+                                        <div class="alert-level critical">
+                                            <span class="alert-icon">🔴</span>
+                                            <span class="alert-name">Ransomware Detection</span>
+                                            <span class="alert-desc">Mass file encryption + Shadow copy deletion</span>
+                                        </div>
+                                        <div class="alert-level critical">
+                                            <span class="alert-icon">🔴</span>
+                                            <span class="alert-name">Privilege Escalation</span>
+                                            <span class="alert-desc">Non-admin to admin in < 5 min</span>
+                                        </div>
+                                        <div class="alert-level high">
+                                            <span class="alert-icon">🟠</span>
+                                            <span class="alert-name">Lateral Movement</span>
+                                            <span class="alert-desc">Same account > 5 systems in 10 min</span>
+                                        </div>
+                                        <div class="alert-level high">
+                                            <span class="alert-icon">🟠</span>
+                                            <span class="alert-name">Data Exfiltration</span>
+                                            <span class="alert-desc">Outbound transfer > 1GB to unknown dest</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formation et sensibilisation -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">7. Formation & Sensibilisation</h3>
+                    </div>
+
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Programme de Formation</h3>
+                            <p><strong>Onboarding:</strong> 4h de formation sécurité obligatoire premiers jours</p>
+                            <p><strong>Continu:</strong> 2h/trimestre modules e-learning adaptés au rôle</p>
+                            <p><strong>Spécialisé:</strong> Formations certifiantes pour équipes IT (CISSP, CEH)</p>
+                            <p><strong>Évaluation:</strong> Tests de connaissance avec 80% minimum requis</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-fish"></i>
+                            <h3>Campagnes Anti-Phishing</h3>
+                            <p><strong>Fréquence:</strong> 2 simulations/mois aléatoires</p>
+                            <p><strong>Progression:</strong> Difficulté croissante (spear phishing, CEO fraud)</p>
+                            <p><strong>Metrics:</strong> Taux de clic < 5% objectif, formation immédiate si échec</p>
+                            <p><strong>Récompenses:</strong> Gamification avec badges et prix trimestriels</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Communication & Culture</h3>
+                            <p><strong>Newsletter:</strong> "Security Spotlight" mensuelle avec cas réels</p>
+                            <p><strong>Affiches:</strong> Campagnes visuelles rotatives dans les locaux</p>
+                            <p><strong>Champions:</strong> Réseau d'ambassadeurs sécurité par département</p>
+                            <p><strong>Événements:</strong> Cybersecurity Week annuelle avec ateliers</p>
+                        </div>
+                    </div>
+
+                    <!-- Gestion des incidents -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">8. Gestion des Incidents de Sécurité</h3>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Classification & Escalation</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="compliance-frameworks">
+                                    <div class="framework">
+                                        <h4>Matrice d'Escalation</h4>
+                                        <div class="compliance-controls">
+                                            <div class="control">
+                                                <span class="control-id">SEV 1</span>
+                                                <span class="control-desc">Impact business critique - Comité crise immédiat</span>
+                                                <span class="status implemented">15min</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">SEV 2</span>
+                                                <span class="control-desc">Impact significatif - RSSI + Management</span>
+                                                <span class="status implemented">1h</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">SEV 3</span>
+                                                <span class="control-desc">Impact modéré - Équipe sécurité</span>
+                                                <span class="status implemented">4h</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">SEV 4</span>
+                                                <span class="control-desc">Impact faible - SOC niveau 1</span>
+                                                <span class="status implemented">24h</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-procedures"></i>
+                                <h3>Playbooks de Réponse</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="hunting-playbooks">
+                                    <h4>Scénarios Documentés</h4>
+                                    <ul>
+                                        <li><strong>Ransomware:</strong> Isolation immédiate, snapshot restore, négociation interdite</li>
+                                        <li><strong>Data Breach:</strong> Containment, forensics, notification CNIL sous 72h</li>
+                                        <li><strong>Account Compromise:</strong> Disable account, reset sessions, MFA mandatory</li>
+                                        <li><strong>DDoS Attack:</strong> CDN activation, rate limiting, ISP coordination</li>
+                                        <li><strong>Insider Threat:</strong> Silent monitoring, legal involvement, evidence preservation</li>
+                                        <li><strong>Supply Chain:</strong> Vendor isolation, alternative activation, impact assessment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audit et amélioration continue -->
+                    <div class="section-header" style="margin-top: 4rem;">
+                        <h3 class="section-title" style="font-size: 2.5rem;">9. Audit & Amélioration Continue</h3>
+                    </div>
+
+                    <div class="audit-schedule">
+                        <h4>Programme d'Audit Annuel</h4>
+                        <div class="audit-timeline">
+                            <div class="audit-item">
+                                <span class="audit-date">T1</span>
+                                <span class="audit-type">Audit Conformité PSSI - Interne</span>
+                                <span class="audit-status completed">100%</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">T2</span>
+                                <span class="audit-type">Pentest Infrastructure - Externe</span>
+                                <span class="audit-status completed">100%</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">T3</span>
+                                <span class="audit-type">Audit ISO 27001 - Certification</span>
+                                <span class="audit-status in-progress">En cours</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">T4</span>
+                                <span class="audit-type">Red Team Exercise - Full scope</span>
+                                <span class="audit-status planned">Planifié</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPIs et métriques -->
+                    <div class="monitoring-dashboard" style="margin-top: 3rem;">
+                        <div class="metric-group">
+                            <h4>KPIs Sécurité Télétravail</h4>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-name">Taux Conformité VPN</span>
+                                    <span class="metric-value">98.5%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Endpoints Conformes</span>
+                                    <span class="metric-value">96.2%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Patches à jour</span>
+                                    <span class="metric-value">99.1%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Formation complétée</span>
+                                    <span class="metric-value">94.8%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents de référence -->
+                    <div class="compliance-docs" style="margin-top: 3rem; background: var(--card-gradient); padding: 2rem; border-radius: 20px;">
+                        <h4 style="color: var(--primary-light); margin-bottom: 2rem;">Documents PSSI Associés</h4>
+                        <div class="doc-grid">
+                            <div style="padding: 1rem;">
+                                <h5 style="color: var(--primary); margin-bottom: 1rem;">Politiques</h5>
+                                <ul style="list-style: none;">
+                                    <li><a href="#" class="doc-link">POL-001: Politique Générale de Sécurité</a></li>
+                                    <li><a href="#" class="doc-link">POL-002: Politique de Classification des Données</a></li>
+                                    <li><a href="#" class="doc-link">POL-003: Politique d'Accès à Distance</a></li>
+                                    <li><a href="#" class="doc-link">POL-004: Politique BYOD</a></li>
+                                </ul>
+                            </div>
+                            <div style="padding: 1rem;">
+                                <h5 style="color: var(--primary); margin-bottom: 1rem;">Procédures</h5>
+                                <ul style="list-style: none;">
+                                    <li><a href="#" class="doc-link">PRO-001: Gestion des Incidents</a></li>
+                                    <li><a href="#" class="doc-link">PRO-002: Gestion des Changements</a></li>
+                                    <li><a href="#" class="doc-link">PRO-003: Sauvegarde et Restauration</a></li>
+                                    <li><a href="#" class="doc-link">PRO-004: Revue des Droits d'Accès</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PCA Tab -->
+                <div class="doc-panel" id="pca">
+                    <div class="section-header">
+                        <div class="section-subtitle">CONTINUITÉ D'ACTIVITÉ</div>
+                        <h2 class="section-title">PCA - Plan de Continuité d'Activité</h2>
+                        <p class="section-description">Stratégie complète pour maintenir les opérations critiques en cas de crise majeure.</p>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-business-time"></i>
+                                <h3>Analyse d'Impact (BIA)</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="compliance-frameworks">
+                                    <div class="framework">
+                                        <h4>Processus Critiques Identifiés</h4>
+                                        <div class="compliance-controls">
+                                            <div class="control">
+                                                <span class="control-id">P1</span>
+                                                <span class="control-desc">Services d'authentification</span>
+                                                <span class="status implemented">RTO: 30min</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">P2</span>
+                                                <span class="control-desc">Accès VPN sécurisé</span>
+                                                <span class="status implemented">RTO: 1h</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">P3</span>
+                                                <span class="control-desc">Services de messagerie</span>
+                                                <span class="status implemented">RTO: 2h</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">P4</span>
+                                                <span class="control-desc">Applications métier</span>
+                                                <span class="status implemented">RTO: 4h</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Scénarios de Crise</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="threat-model">
+                                    <h4>Risques Couverts</h4>
+                                    <div class="threat-categories">
+                                        <div class="threat-cat">
+                                            <span class="threat-level high">CRITIQUE</span>
+                                            <span>Cyber-attaque majeure, Ransomware</span>
+                                        </div>
+                                        <div class="threat-cat">
+                                            <span class="threat-level high">CRITIQUE</span>
+                                            <span>Panne datacenter, Sinistre majeur</span>
+                                        </div>
+                                        <div class="threat-cat">
+                                            <span class="threat-level medium">ÉLEVÉ</span>
+                                            <span>Pandémie, Crise sanitaire</span>
+                                        </div>
+                                        <div class="threat-cat">
+                                            <span class="threat-level medium">ÉLEVÉ</span>
+                                            <span>Défaillance fournisseur critique</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="solution-grid" style="margin-top: 3rem;">
+                        <div class="solution-card">
+                            <div class="solution-number">1</div>
+                            <h3>Organisation de Crise</h3>
+                            <p>Cellule de crise 24/7, chaîne d'alerte définie, responsabilités claires, communication de crise structurée.</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="solution-number">2</div>
+                            <h3>Sites de Repli</h3>
+                            <p>Site de secours équipé, infrastructure cloud de backup, postes de travail de secours, accès distant sécurisé.</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="solution-number">3</div>
+                            <h3>Tests & Exercices</h3>
+                            <p>Tests PCA trimestriels, exercices grandeur nature annuels, mise à jour continue, retour d'expérience documenté.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRA Tab -->
+                <div class="doc-panel" id="pra">
+                    <div class="section-header">
+                        <div class="section-subtitle">REPRISE D'ACTIVITÉ</div>
+                        <h2 class="section-title">PRA - Plan de Reprise d'Activité</h2>
+                        <p class="section-description">Procédures techniques détaillées pour la restauration rapide des systèmes IT.</p>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-server"></i>
+                                <h3>Architecture de Secours</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="architecture-diagram">
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Infrastructure Primaire</div>
+                                        <div class="layer-components">
+                                            <div class="component">Datacenter Principal</div>
+                                            <div class="component">Serveurs Production</div>
+                                            <div class="component">Storage SAN/NAS</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Réplication</div>
+                                        <div class="layer-components">
+                                            <div class="component">Réplication Synchrone</div>
+                                            <div class="component">Snapshots Horaires</div>
+                                            <div class="component">Backup Journalier</div>
+                                        </div>
+                                    </div>
+                                    <div class="arch-layer">
+                                        <div class="layer-title">Site de Secours</div>
+                                        <div class="layer-components">
+                                            <div class="component">Datacenter Secondaire</div>
+                                            <div class="component">Infrastructure Cloud</div>
+                                            <div class="component">DR as a Service</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-sync-alt"></i>
+                                <h3>Procédures de Reprise</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="deployment-steps">
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">1</span>
+                                            <h4>Activation PRA</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Évaluation de l'incident</li>
+                                            <li>Décision d'activation</li>
+                                            <li>Notification des équipes</li>
+                                            <li>Préparation infrastructure</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">2</span>
+                                            <h4>Basculement</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Arrêt services primaires</li>
+                                            <li>Activation site secours</li>
+                                            <li>Restauration données</li>
+                                            <li>Tests de validation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="deploy-phase">
+                                        <div class="phase-header">
+                                            <span class="phase-number">3</span>
+                                            <h4>Retour Normal</h4>
+                                        </div>
+                                        <ul>
+                                            <li>Réparation site primaire</li>
+                                            <li>Synchronisation données</li>
+                                            <li>Basculement retour</li>
+                                            <li>Validation complète</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="monitoring-dashboard" style="margin-top: 3rem;">
+                        <div class="metric-group">
+                            <h4>Objectifs de Reprise</h4>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-name">RPO Global</span>
+                                    <span class="metric-value">< 1 heure</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">RTO Services Critiques</span>
+                                    <span class="metric-value">< 4 heures</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Taux de Réussite Tests</span>
+                                    <span class="metric-value">98%</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-name">Dernière Validation</span>
+                                    <span class="metric-value">< 30 jours</span>
+                                    <span class="metric-status good">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GDPR Tab -->
+                <div class="doc-panel" id="gdpr">
+                    <div class="section-header">
+                        <div class="section-subtitle">PROTECTION DES DONNÉES</div>
+                        <h2 class="section-title">GDPR - Conformité RGPD</h2>
+                        <p class="section-description">Mise en conformité complète avec le Règlement Général sur la Protection des Données.</p>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-user-shield"></i>
+                                <h3>Droits des Personnes</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="compliance-frameworks">
+                                    <div class="framework">
+                                        <h4>Droits Garantis</h4>
+                                        <div class="compliance-controls">
+                                            <div class="control">
+                                                <span class="control-id">Art.15</span>
+                                                <span class="control-desc">Droit d'accès aux données</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">Art.16</span>
+                                                <span class="control-desc">Droit de rectification</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">Art.17</span>
+                                                <span class="control-desc">Droit à l'effacement</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                            <div class="control">
+                                                <span class="control-id">Art.20</span>
+                                                <span class="control-desc">Droit à la portabilité</span>
+                                                <span class="status implemented">✓</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-lock"></i>
+                                <h3>Mesures de Sécurité</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="tech-specs">
+                                    <h4>Protection Technique</h4>
+                                    <ul>
+                                        <li><strong>Chiffrement:</strong> AES-256 pour toutes les données sensibles</li>
+                                        <li><strong>Pseudonymisation:</strong> Séparation identité/données</li>
+                                        <li><strong>Contrôle d'accès:</strong> RBAC avec audit trail</li>
+                                        <li><strong>Privacy by Design:</strong> Intégré dès la conception</li>
+                                        <li><strong>Minimisation:</strong> Collecte limitée au nécessaire</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="audit-schedule" style="margin-top: 3rem;">
+                        <h4>Registre des Traitements</h4>
+                        <div class="audit-timeline">
+                            <div class="audit-item">
+                                <span class="audit-date">RH</span>
+                                <span class="audit-type">Données collaborateurs télétravail</span>
+                                <span class="audit-status completed">Conforme</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">IT</span>
+                                <span class="audit-type">Logs de connexion VPN</span>
+                                <span class="audit-status completed">Conforme</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">Sécurité</span>
+                                <span class="audit-type">Monitoring endpoints</span>
+                                <span class="audit-status in-progress">En révision</span>
+                            </div>
+                            <div class="audit-item">
+                                <span class="audit-date">Support</span>
+                                <span class="audit-type">Tickets et incidents</span>
+                                <span class="audit-status completed">Conforme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PGI Tab -->
+                <div class="doc-panel" id="pgi">
+                    <div class="section-header">
+                        <div class="section-subtitle">GESTION DES INCIDENTS</div>
+                        <h2 class="section-title">PGI - Plan de Gestion des Incidents</h2>
+                        <p class="section-description">Processus structuré de détection, réponse et résolution des incidents de sécurité.</p>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <h3>Classification des Incidents</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="alerting-system">
+                                    <h4>Niveaux de Criticité</h4>
+                                    <div class="alert-levels">
+                                        <div class="alert-level critical">
+                                            <span class="alert-icon">🔴</span>
+                                            <span class="alert-name">P1 - CRITIQUE</span>
+                                            <span class="alert-desc">Impact majeur - Réponse < 15 min</span>
+                                        </div>
+                                        <div class="alert-level high">
+                                            <span class="alert-icon">🟠</span>
+                                            <span class="alert-name">P2 - ÉLEVÉ</span>
+                                            <span class="alert-desc">Impact significatif - Réponse < 1h</span>
+                                        </div>
+                                        <div class="alert-level medium">
+                                            <span class="alert-icon">🟡</span>
+                                            <span class="alert-name">P3 - MOYEN</span>
+                                            <span class="alert-desc">Impact modéré - Réponse < 4h</span>
+                                        </div>
+                                        <div class="alert-level low">
+                                            <span class="alert-icon">🟢</span>
+                                            <span class="alert-name">P4 - FAIBLE</span>
+                                            <span class="alert-desc">Impact mineur - Réponse < 24h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-users"></i>
+                                <h3>Équipe CSIRT</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="ai-components">
+                                    <div class="ai-module">
+                                        <h4>Rôles & Responsabilités</h4>
+                                        <ul>
+                                            <li>Incident Manager - Coordination globale</li>
+                                            <li>Analystes Sécurité - Investigation technique</li>
+                                            <li>Forensics Expert - Analyse approfondie</li>
+                                            <li>Communication Manager - Gestion de crise</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-item" style="margin-top: 3rem;">
+                        <h3>Processus de Gestion d'Incident</h3>
+                        <div class="deployment-steps">
+                            <div class="deploy-phase">
+                                <div class="phase-header">
+                                    <span class="phase-number">1</span>
+                                    <h4>Détection & Alerte</h4>
+                                </div>
+                                <ul>
+                                    <li>Monitoring SIEM 24/7</li>
+                                    <li>Corrélation automatique des événements</li>
+                                    <li>Alertes SOC en temps réel</li>
+                                </ul>
+                            </div>
+                            <div class="deploy-phase">
+                                <div class="phase-header">
+                                    <span class="phase-number">2</span>
+                                    <h4>Analyse & Containment</h4>
+                                </div>
+                                <ul>
+                                    <li>Évaluation de l'impact</li>
+                                    <li>Isolation des systèmes compromis</li>
+                                    <li>Préservation des preuves</li>
+                                </ul>
+                            </div>
+                            <div class="deploy-phase">
+                                <div class="phase-header">
+                                    <span class="phase-number">3</span>
+                                    <h4>Éradication & Récupération</h4>
+                                </div>
+                                <ul>
+                                    <li>Suppression des menaces</li>
+                                    <li>Restauration des services</li>
+                                    <li>Validation de la remédiation</li>
+                                </ul>
+                            </div>
+                            <div class="deploy-phase">
+                                <div class="phase-header">
+                                    <span class="phase-number">4</span>
+                                    <h4>Post-Incident</h4>
+                                </div>
+                                <ul>
+                                    <li>Analyse post-mortem</li>
+                                    <li>Lessons learned</li>
+                                    <li>Amélioration continue</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DPIA Tab -->
+                <div class="doc-panel" id="dpia">
+                    <div class="section-header">
+                        <div class="section-subtitle">ANALYSE D'IMPACT</div>
+                        <h2 class="section-title">DPIA - Data Protection Impact Assessment</h2>
+                        <p class="section-description">Évaluation systématique des risques pour la protection des données personnelles.</p>
+                    </div>
+
+                    <div class="doc-grid">
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-search"></i>
+                                <h3>Critères DPIA</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="security-matrix">
+                                    <div class="security-domain">
+                                        <h4>Cas Obligatoires</h4>
+                                        <ul>
+                                            <li>Traitement à grande échelle de données sensibles</li>
+                                            <li>Surveillance systématique à grande échelle</li>
+                                            <li>Évaluation/scoring incluant le profilage</li>
+                                            <li>Nouvelles technologies (IA, biométrie)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="doc-card">
+                            <div class="doc-card-header">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>Méthodologie</h3>
+                            </div>
+                            <div class="doc-content-inner">
+                                <div class="nist-functions">
+                                    <div class="nist-function">
+                                        <span class="function-name">1. Description du traitement</span>
+                                        <span class="function-score">✓</span>
+                                    </div>
+                                    <div class="nist-function">
+                                        <span class="function-name">2. Évaluation nécessité</span>
+                                        <span class="function-score">✓</span>
+                                    </div>
+                                    <div class="nist-function">
+                                        <span class="function-name">3. Analyse des risques</span>
+                                        <span class="function-score">✓</span>
+                                    </div>
+                                    <div class="nist-function">
+                                        <span class="function-name">4. Mesures envisagées</span>
+                                        <span class="function-score">✓</span>
+                                    </div>
+                                    <div class="nist-function">
+                                        <span class="function-name">5. Validation DPO</span>
+                                        <span class="function-score">✓</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="problem-grid" style="margin-top: 3rem;">
+                        <div class="problem-card">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>DPIA Télétravail</h3>
+                            <p>Analyse complète du traitement des données dans le cadre du télétravail : monitoring, logs VPN, données RH, outils collaboratifs.</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Mesures de Mitigation</h3>
+                            <p>Chiffrement end-to-end, minimisation des données collectées, anonymisation des logs, durées de conservation limitées.</p>
+                        </div>
+                        <div class="problem-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Validation & Suivi</h3>
+                            <p>Avis favorable du DPO, consultation du CSE, révision annuelle, mise à jour selon évolution des risques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bg"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CovY</h3>
+                    <p>Solution premium de cybersécurité pour le télétravail, conçue pour les entreprises exigeantes.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Documentation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#pssi"><i class="fas fa-shield-alt"></i> PSSI</a></li>
+                        <li><a href="#pca"><i class="fas fa-business-time"></i> PCA</a></li>
+                        <li><a href="#pra"><i class="fas fa-sync-alt"></i> PRA</a></li>
+                        <li><a href="#gdpr"><i class="fas fa-user-shield"></i> GDPR</a></li>
+                        <li><a href="#pgi"><i class="fas fa-exclamation-triangle"></i> PGI</a></li>
+                        <li><a href="#dpia"><i class="fas fa-clipboard-check"></i> DPIA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ressources</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                        <li><a href="ecommerce-pro.html"><i class="fas fa-desktop"></i> Démo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Premium</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:adelB-caulinL@covy-security-ynov.fr"><i class="fas fa-envelope"></i> adelB-caulinL@covy-security-ynov.fr</a></li>
+                        <li><a href="tel:+33667719000"><i class="fas fa-phone"></i> +33 6 67 71 90 00</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 CovY Security. Tous droits réservés Par Adel Bouachraoui et Caulin Leroy</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation entre les tabs
+        document.querySelectorAll('.doc-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-tab');
+                
+                // Update active tab
+                document.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update active panel
+                document.querySelectorAll('.doc-panel').forEach(panel => panel.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
