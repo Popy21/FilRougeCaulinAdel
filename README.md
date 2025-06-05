@@ -1,7 +1,6 @@
 # CovY Security - Solution de Cybersécurité pour le Télétravail
 
 <div align="center">
-  <img src="assets/logo-covy.svg" alt="CovY Logo" width="200"/>
   
   [![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
   [![License](https://img.shields.io/badge/License-Proprietary-red.svg)]()
@@ -23,6 +22,9 @@
 - [Roadmap](#-roadmap)
 - [Équipe](#-équipe)
 - [Contact](#-contact)
+## 🌟 Démo Temp Réel
+
+https://paraweb.fr/covy/
 
 ## 🌟 Vue d'ensemble
 
