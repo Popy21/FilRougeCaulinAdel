@@ -245,8 +245,8 @@ CovY propose une approche holistique de la sécurité du télétravail :
 
 ### Équipe core
 
-- **Adel Bouachraoui Bourjaillat** - CEO
-- **Caulin Leroy ** - Lead AI/ML Engineer
+- **Adel Bouachraoui Bourjaillat** - CEO & petit fils de bill Gate
+- **Caulin Leroy ** - Lead AI/ML Engineer & juste un mec chill
 
 ## 📞 Contact
 
