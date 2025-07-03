@@ -1,0 +1,127 @@
+Procédure de Gestion des Incidents de Sécurité - Site CovY
+Date d'entrée en vigueur : 22/06/2025
+Responsable : Service Sécurité (Caulin)
+
+1. Objectifs et Périmètre
+Cette procédure définit les étapes de gestion des incidents de sécurité affectant la plateforme CovY. Elle couvre les événements suivants :
+
+Accès non autorisés au réseau/systèmes (Bastion, VLAN administration)
+Compromission des applications/services frontaux (serveurs web)
+Fuites ou vols de données (clients, paiements, sauvegardes)
+Attaques par déni de service (ciblant l'infrastructure ou services)
+Activités suspectes dans les journaux système/réseau
+Périmètre technique :
+
+Interfaces publiques DMZ (VLAN 20)
+Environnements de données (VLAN 30)
+Systèmes d'administration (VLAN 40, 50)
+Infrastructure de sauvegarde (VLAN 60)
+2. Détection et Signalement
+2.1 Sources de détection
+Alerte SIEM (logs système/réseau)
+Notification IDS/IPS
+Rapport du SOC externe
+Signalement équipe technique (support@covy.com)
+Clientèle (incident@covy.com)
+2.2 Critères de signalement obligatoire
+Tout personnel détectant un événement répondant aux critères suivants doit alerter immédiatement :
+
+Tentatives d'accès non-autorisé aux VLANs administrés
+Modifications non-expliquées dans les backups (VLAN 60)
+Activités suspectes sur l'API de paiement
+Erreurs systèmes répétitives avec motifs suspects
+Fuite potentielle de données personnelles client
+3. Procédure d'Évaluation
+3.1 Classification initiale
+Catégorie Critique (réponse < 15 min)
+
+Compromission données paiement RGPD
+Attaque DDoS impactant SLA 99.5%
+Accès non-autorisé VLANS 30/40
+Ransomware système serveur
+Catégorie Majeure (réponse < 1h)
+
+Vulnérabilité critique identifiée
+Anomalies sauvegarde (hash invalidé)
+Tentative brute force bastion
+Fuite données internes
+Catégorie Mineure (réponse < 24h)
+
+Activités réseau suspectes
+Tentatives de scan répétées
+Alerte faussement positive
+3.2 Évaluation technique
+Réalisée par Caulin ou un membre délégué de sécurité :
+
+Capture snapshot système immédiate
+Dump mémoire des processus suspects
+Analyse horodatée des logs corrélés
+Cartographie de l'impact potentiel
+4. Procédure de Régression
+4.1 Confinement immédiat
+Isolation réseau des systèmes compromis
+Désactivation temporaire des composants affectés
+Suspension des accès utilisateurs/administrateurs concernés
+Établissement réseau de quarantaine
+4.2 Éradication
+Méthodes selon nature incident :
+
+Ré-initialisation systèmes compromis
+Suppression des artefacts malveillants identifiés
+Correction des vulnérabilités exploitées
+Ré-initialisation complète des secrets exposés
+4.3 Rétablissement
+Phase garantissant :
+
+Vérification pré-restauration du clean backup
+Test complet des fonctionnalités pré-alerte
+Monitoring renforcé 24h post-restauration
+Validation RGPD données clients rétablies
+5. Communication
+5.1 Communication interne
+Alerte équipe dirigeante dans < 10 min (cat. critique)
+Notification équipes techniques via groupe dédié
+Briefing stratégique heure H+1 et toutes les 4h
+Comité crise pour incidents > 2h
+5.2 Communication externe
+Notifications obligatoires :
+
+CNIL sous 72h si fuite données personnelles
+Prestataires paiement sous 1h si impact système
+Hébergeur en cas d'attaque infrastructure
+Clients CovY :
+
+Message site web sous 4h (formulaire pré-approuvé)
+Notifications emails pour clientèle affectée
+Support dédié crise (+33 800 COVY-URG)
+Dossier informations transparentes
+6. Documentation et Suivi
+6.1 Registre des Incidents
+Les éléments obligatoires par entrée :
+
+ID unique CovY (ex: INC-2025-001)
+Horodatage détection/résolution
+Classement impact (Confidentialité/Intégrité/Disponibilité)
+Systèmes/VLAN affectés
+Actions de confinement exécutées
+Liste personnels impliqués
+6.2 Rapport Post-Incident
+À produire sous 72h après résolution :
+
+Chronologie détaillée événements
+Analyse causes racines
+Liste mesures correctives
+Évaluation impact opération/financier client
+Recommandations plan prévention
+6.3 Valider les Correctifs
+Par le responsable sécurité (Caulin) :
+
+Réexamen configurations réseau
+Mise à jour règles firewall/VLAN
+Vérification durcissement serveurs
+Audit sécurité code associé
+7. Entraînements et Amélioration
+Simulation trimestrielle : scénario impact RGPD/paiement
+Revue procédure semestrielle comité sécurité
+Mise à jour annuelle coordonnée avec audit externe
+Formation renforcée agents support après incident critique

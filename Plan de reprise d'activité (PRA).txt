@@ -1,0 +1,109 @@
+# PLAN DE REPRISE D'ACTIVITÉ (PRA) - Site CovY
+# Date d'établissement : 22 juin 2025
+# Responsable PRA : LEROY Caulin (Responsable Sécurité)
+
+## 1. OBJECTIFS DU PRA
+Assurer la restauration des services critiques du site e-commerce CovY dans un délai maximal de 6 heures (RTO) avec une perte de données maximale de 15 minutes (RPO) suite à un sinistre majeur affectant l'infrastructure principale. Scénarios couverts : destruction du datacenter principal, cyberattaque paralysante, désastre naturel (incendie/inondation).
+
+## 2. SERVICES CRITIQUES PRIORITAIRES
+- Frontal web (VLAN 20) : Interface client et catalogue produits
+- Base de données (VLAN 30) : Données clients, commandes et transactions
+- Module paiement : Intégrations Stripe/PayPal
+- Back-office (VLAN 40) : Gestion des stocks et commandes
+
+## 3. ÉQUIPE D'INTERVENTION CRISE
+- **Responsable PRA (Caulin)** : Décision d'activation, coordination globale
+- **Administrateurs systèmes (x2)** : Restauration infrastructure et données
+- **Responsable développement (Adel)** : Vérification intégrité applicative
+- **Support clients** : Communication utilisateurs et partenaires
+
+## 4. INVENTAIRE DES RESSOURCES DE SECOURS
+- **Site secondaire** : AWS Paris (us-west-2)
+- **Serveurs préconfigurés** : 
+  * Web : 2 instances EC2 (AMI "covydr-web-v3")
+  * Base de données : RDS PostgreSQL (réplication asynchrone)
+- **Stockage** : S3 Glacier Instant Retrieval pour sauvegardes chiffrées
+- **Connectivité** : Load Balancer avec IP flottante préaffectée
+
+## 5. PROCÉDURE DE BASUCLE
+
+### Phase 1 : Déclenchement (0-15 min)
+- Vérification par monitoroing Nagios/Prometheus
+- Confirmation du désastre par Caulin
+- Activation de l'alerte via Slack/WhatsApp groupe "PRA-CovY"
+
+### Phase 2 : Activation du site secondaire (15 min - 4h)
+Étape 2.1 : Infrastructure
+  - Lancer les instances EC2 web DR
+  - Activer RDS PostgreSQL à partir du dernier snapshot SAN
+  - Mettre à jour DNS (Route53) vers les nouveaux endpoints
+Étape 2.2 : Données
+  - Système de fichiers : Monter le volume EBS "covydr-webstorage"
+  - Base de données : Restaurer logs WAL via script ./apply_wal_backups.sh
+Étape 2.3 : Validation intermédiaire
+  - Vérifier accessibilité https://dr.covy.com/healthcheck
+  - Tester processus commande sans paiement réel
+
+### Phase 3 : Vérification complète (4h-5h30)
+- Test end-to-end de commande sur environnement de secours
+- Script d'intégrité des données ./verify_db_consistency.sh
+- Filtrage progressif du trafic (1%, 25%, 100%)
+- Désactivation des fonctionnalités non-critiques (recommandations produits)
+
+### Phase 4 : Reprise opérationnelle (5h30-6h)
+- Redirection totale du trafic vers site secondaire
+- Activation monitoroing avancé NewRelic/CloudWatch
+- Communication active aux utilisateurs via email/site/RS
+
+## 6. PLAN DE RETOUR À LA NORMALE
+- Condition : Infrastructure principale restaurée et testée
+- Fenêtre : Dimanche 00h-04h (période creuse)
+Étapes :
+  1. Démarrer synchronisation inverse BDD
+  2. Basculer DNS progressivement (via TTL réduit)
+  3. Arrêter machines EC2 DR après 72h de stabilité
+  4. Archivage logs dans bucket S3 "covy-pra-logs"
+
+## 7. COMMUNICATION DE CRISE
+- Clients : 
+  * Premier message <45 min (template EMAIL_PRA_CLIENT_v3)
+  * Mise à jour horaire via réseaux sociaux et bandeau site
+- Partenaires paiement : 
+  * Notifier Stripe/PayPal via canal sécurisé
+  * Suspension temporaire remboursements si nécessaire
+- Interne : 
+  * Dashboard en temps réel accessible à direction
+  * 1 point téléphonique / heure pour équipes
+
+## 8. DOCUMENTATION TECHNIQUE ASSOCIÉE
+- Emplacement des sauvegardes : s3://covy-dr-backups/2025-06/
+- Scripts critiques : 
+  * apply_wal_backups.sh (GitHub repo "covy-dr-scripts")
+  * create_ec2_from_ami.py
+6. Documents Associés
+Cette politique s'inscrit dans un cadre réglementaire incluant :
+- Politique de confidentialité RGPD
+- Charte utilisateur des systèmes d'information
+- Plan de reprise d'activité (PRA)
+- Procédures de gestion des incidents de sécurité
+
+génère moi le  Plan de reprise d'activité (PRA) de façon la plus détaillé possible en texte uniquement afin que tout rentre dans un seul document .txt (pas de tableau)
+
+mon site s'appel CovY et la date est le 22/06/2025- Accès SSH : Clés stockées dans HashiCorp Vault (path secret/pra)
+- Configuration IP : Fichier /etc/network/interfaces.d/covy-dr.cfg
+
+## 9. CALENDRIER DE TESTS
+- Tests complets : Trimestriels (dernier : 15 juin 2025)
+  * Scénario : Arrêt brutal datacenter principal
+  * Métriques : objectif RTO/RPO validés à J-7
+- Tests partiels : Mensuels (check AMI + validations scripts)
+- Audit DR : Semestriel par prestataire externe (prochain : septembre 2025)
+
+## 10. MISE À JOUR ET VALIDATION
+- Révision annuelle systématique (prochaine : 22 juin 2026)
+- Déclenchement immédiat après modification infrastructure critique
+- Signatures de validation : 
+  * Responsable sécurité : LEROY Caulin
+  * Direction générale : BOUACHRAOUI Adel
+
+--- FIN DU DOCUMENT PRA ---

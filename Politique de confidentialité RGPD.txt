@@ -1,0 +1,103 @@
+POLITIQUE DE CONFIDENTIALITÉ RGPD
+Site : CovY | Plateforme de e-commerce alimentaire
+Date d'entrée en vigueur : 22 juin 2025
+Dernière mise à jour : 22 juin 2025
+
+1. RESPONSABLE DE TRAITEMENT
+- ENTITÉ : CovY SAS
+- Immatriculation : RCS Paris 987 654 321 
+- Adresse : 15 Avenue Gourmet, 75012 Paris
+- DPO : Jean Dupont (dpo@covy.fr)
+- Téléphone : +33 1 23 45 67 89
+
+2. DONNÉES COLLECTÉES
+a) Données clients :
+- Identité : Nom, prénom, date de naissance
+- Coordonnées : Adresse physique, email, téléphone
+- Économiques : Historique d'achat, paniers moyens
+- Sécurité : Identifiants certificat numérique X.509
+
+b) Données techniques :
+- Adresses IP (masquées après 24h)
+- Données d'usage : Pages consultées, temps de session
+- Périphériques: Modèle d'appareil, empreinte navigateur
+
+c) Cookies :
+- Nécessaires : SessionUtilisateur, PanierActive
+- Préférences : LangueSelection, RecoTheme
+- Statistiques : CovyAnalyticsToken (anonymisé)
+
+3. FINALITÉS DU TRAITEMENT
+Légales bases RGPD :
+- CONTRACTUELLE : Commande livraison chronomètre (Article 6.1b)
+- LÉGALE : Authentification age gate 18+ alcool (Article 6.1c)
+- INTÉRÊT LÉGITIME : Prévention fraude analyse comportement (Article 6.1f)
+- CONSENTEMENT : Marketing personalised (Article 6.1a)
+
+4. DESTINATAIRES
+Catégorie                         Exemples                 Garanties
+Prestataires logistiques         ChronoFresh              Clause RGPD type
+Processeurs paiement             PaySecure France         PCI DSS Level 1
+Marketing sous consentement      CovyPartners Program     Anonymisation avancée
+
+5. DURÉES DE CONSERVATION
+Donnée                      Critère                         Durée
+---
+Compte client               Dernière connexion             36 mois
+Données transactionnelles  Obligation légale              60 mois
+Cookies analytiques         Consentement valide            13 mois
+Données prospect           Abandon panier                 120 jours
+
+6. TRANSFERTS INTERNATIONAUX
+Pays tiers                      Garantie                      Impact
+États-Unis (analytics)       SCC avec APIDPA                 Anonymisation pré-transfer
+Royaume-Uni                  Décision d'adéquation           Chiffrement AES-256
+
+7. SÉCURITÉ DES DONNÉES
+Mesures techniques :
+- Chiffrement : TLS 1.3 (communication), AES-256 (stockage)
+- Pseudo-anonymisation : Tokenisation des cartes via PSP
+- Pentest trimestriel: Scan vulnérabilités OWASP Top 10
+
+Mesures organisationnelles :
+- Audits opérationnels tierce partie annuels
+- Procédures de gestion des violations (72h max)
+- Auditabilitéd des flux: Traçabilité accès base SQL 30 jours
+
+8. DROITS RGPD
+a) Modalités d'exercice :
+- Portail sécurisé : compte.covy.fr/donnees
+- Formulaire postal : Service RGPD | CovY SAS | BP 402, 75004 Paris
+
+b) Délais de réponse :
+- Accès/Portabilité : 30 jours max
+- Suppression/Rectification : 15 jours ouvrés
+- Opposition marketing : Traitement immédiat sous 72h
+
+9. AUTOMATISATION ET PROFILAGE
+Décision algorithmique :
+- Newsletter personnalisée: Recettes, prompts
+- Anti-fraud system: Fido Alliance criteria
+Droit à l'intervention humaine: option "Verification humaine" dans paramètres
+
+10. COOKIES ET TRACERS
+Catégorie                   Exemple                   Gestion
+---
+Fonctionnels                GeoLivraison              Nécessaire
+Mesure d'audience           CovyHeatMap               Opt-in
+Personnalisation            RecoRecettes              Préférences
+
+Consentement granularité :
+- Accept différencié par finalité
+- Préférences modifiables à tout moment via dashbord_compte > vie_privee
+
+11. CONTACT RGPD
+FONCTION                VECTEUR                                  SUPPORT
+---
+Réclamation RGPD        canal dédié : rgpdex@covy.fr            Accusé réception <24h
+Exercice droits         plateforme numérique : compte.covy.fr/donnees
+Signalement faille      securite@covy.fr (PGP disponible)
+
+12. MISE À JOUR
+Mécanismes de révision :
+- Notice clients publiée pour 30 jours consultation avant application

@@ -1,0 +1,104 @@
+CHARTE UTILISATEUR DES SYSTÈMES D'INFORMATION
+Plateforme E-commerce CovY
+
+1. OBJET ET PORTÉE
+1.1 Cette charte définit les règles d'utilisation des systèmes d'information (SI) pour tous les utilisateurs (employés, prestataires, administrateurs).
+1.2 S'applique à : 
+   - Accès au back-office et bastion
+   - Utilisation des postes d'administration
+   - Gestion des données clients et commandes
+1.3 Périmètre : VLAN 20 (DMZ Web), VLAN 30 (Base de données), VLAN 40 (Admin), VLAN 50 (Bastion)
+
+2. RÈGLES GÉNÉRALES
+2.1 Confidentialité :
+   - Interdiction de partager ses identifiants (article RGPD 32)
+   - Masquer les données confidentielles lors de partages d'écran
+2.2 Disponibilité :
+   - Ne pas exécuter de scripts non autorisés sur les serveurs
+   - Éviter les opérations lourdes durant les pics de trafic
+2.3 Propriété intellectuelle :
+   - Les données produits/catalogue appartiennent exclusivement à [Nom Société]
+   - Interdiction d'extraire des listes clients à des fins personnelles
+
+3. GESTION DES COMPTES
+3.1 Création :
+   - Soumise à validation du responsable sécurité (Caulin)
+   - Fourniture d'une identité officielle obligatoire
+3.2 Critères des mots de passe :
+   - 14 caractères minimum (majuscules, minuscules, chiffres, symboles)
+   - Interdiction de réutilisation des 5 derniers mots de passe
+   - Changement obligatoire tous les 90 jours
+3.3 Conditions de révocation :
+   - 5 tentatives de connexion infructueuses
+   - Détection d'activité anormale (SIEM)
+   - Départ du collaborateur ou changement de fonction
+
+4. CLASSIFICATION ET USAGE DES DONNÉES
+4.1 Niveaux :
+   [PUBLIC] : Fiches produits descriptives - Accès sans restriction
+   [INTERNE] : Stocks, commandes anonymisées - Accès employés uniquement
+   [CONFIDENTIEL] : Données personnelles clients (Art. 9 RGPD) - Accès restreint aux RH
+4.2 Règles de manipulation :
+   - Chiffrement AES-256 obligatoire pour transfert hors SI
+   - Destruction sécurisée via fonction "shred" pour données clients
+   - Limitation des exports CSV aux données strictement nécessaires
+
+5. SÉCURITÉ OPÉRATIONNELLE
+5.1 Postes de travail :
+   - Verrouillage automatique après 7 minutes d'inactivité
+   - Interdiction d'installer des logiciels non validés par l'IT
+5.2 Accès distants :
+   - VPN obligatoire via bastion
+   - Authentification MFA (OTP ou certificat numérique)
+5.3 Sauvegardes :
+   - Interdiction de stocker des données clients sur postes locaux
+   - Utilisation exclusive du VLAN 60 pour les sauvegardes
+
+6. OBLIGATIONS DE JOURNALISATION
+6.1 Traces obligatoires :
+   - Tous les accès aux données confidentielles (heure/user/action)
+   - Opérations critiques (suppression, modification de prix)
+   - Échecs d'authentification
+6.2 Conservation : 180 jours, horodatage assuré par NTP interne
+
+7. ALERTES ET INCIDENTS
+7.1 Signaler immédiatement :
+   - Perte/vol d'appareil lié au SI
+   - Emails frauduleux tentant d'obtenir des accès ("phishing")
+   - Comportement inhabituel des systèmes
+7.2 Procédure d'alerte :
+   Mail : securite@votredomaine.com
+   Tél : [Numéro d'urgence 24/7]
+
+8. RÈGLES TECHNIQUES SPÉCIFIQUES
+8.1 Pour les développeurs :
+   - Validation des pull-requests par 2 pairs minimun
+   - Scan SAST avant merge en branche production
+8.2 Pour les administrateurs :
+   - Durcissement serveurs selon benchmark CIS niveau 2
+   - Toutes les sessions SSH via bastion avec TOR
+
+9. SANCTIONS
+9.1 Non-respect entraîne :
+   - Suspension immédiate des accès
+   - Analyse forensique sur les équipements concernés
+   - Sanctions disciplinaires (avertissement jusqu'au licenciement)
+   - Poursuites pénales en cas de fraude avérée
+
+10. FORMATION
+10.1 Modules obligatoires :
+   - Sensibilisation phishing/ransomware (2h/an)
+   - Mise à jour annuelle sur les nouvelles menaces
+   - Quiz de validation des connaissances après formation
+
+11. VALIDATION ET SUIVI
+11.1 Acceptation :
+> J'accuse réception et accepte les conditions de cette charte
+
+Nom : __________________ 
+Signature : ______________ 
+Date : ___/___/_____
+
+11.2 Révision annuelle consignée dans le registre PSSI (Responsable : Caulin)
+
+--- FIN DU DOCUMENT ---

@@ -1,0 +1,733 @@
+Politique de Sécurité des Systèmes d’Information (PSSI)
+Page 1 : Introduction
+
+1. Objet de la Politique
+Cette politique a pour objectif premier de protéger l'infrastructure, les données et les services de notre plateforme e-commerce contre les menaces internes et externes. Elle établit le cadre de sécurité nécessaire pour garantir en permanence la confidentialité de l'information client, l'intégrité des transactions commerciales, et la disponibilité du service selon nos engagements contractuels.
+
+2. Périmètre d'Application
+Sont concernés par cette politique :
+- Tous les serveurs hébergeant les services (frontend, backend, bases de données)
+- Les réseaux et équipements associés, incluant l'architecture segmentée en VLANs
+- Les applications métier (catalogue produits, gestion de commandes, interface de paiement)
+- Les postes d'administration et accès distants
+- Tout composant physique ou virtuel supportant l'infrastructure critique
+
+3. Public Concerné
+Cette politique s'applique à :
+- L'équipe technique (administrateurs systèmes/réseaux)
+- Les développeurs et responsables QA
+- Le personnel d'administration et de support client
+- Les prestataires externes accédant à nos systèmes
+- La direction responsable de la validation des processus
+
+4. Valeurs Fondamentales
+Notre PSSI repose sur trois piliers indissociables :
+- Confidentialité : Protection des données sensibles (coordonnées clients, paiements) contre tout accès non autorisé.
+- Intégrité : Maintien de l'exactitude et de la complétude des données à chaque étape des processus transactionnels.
+- Disponibilité : Assurance d'un accès continu 24/7 au site avec un SLA contractuel de 99.5%.
+
+5. Principes Directeurs
+- Segmentation stricte : Isolation des zones critiques (paiement/admin) par architecture VLAN
+- Défense en profondeur : Superposition de couches de sécurité (firewall, détection d'intrusion, chiffrement)
+- Privilège minimum : Accès restreint au strict nécessaire pour chaque rôle fonctionnel
+- Transparence : Documentation complète des incidents et audits de conformité réguliers
+
+6. Documents Associés
+Cette politique s'inscrit dans un cadre réglementaire incluant :
+- Politique de confidentialité RGPD
+- Charte utilisateur des systèmes d'information
+- Plan de reprise d'activité (PRA)
+- Procédures de gestion des incidents de sécurité
+
+7. Entrée en Vigueur
+La présente politique prend effet immédiatement après approbation par la direction technique. Tout manquement à ses dispositions pourra entraîner des mesures disciplinaires conformément au règlement interne.
+
+--- Fin de la Page 1 ---
+
+Page 2 : Périmètre et Actifs
+
+Cette politique s'applique à l'ensemble des composants critiques soutenant les opérations du site e-commerce. Les actifs couverts sont catégorisés comme suit :
+
+1. Composants Centraux du Système
+
+Serveurs Web (VLAN 20) : Machines hébergeant l'application frontale et les APIs exposées aux utilisateurs finaux via le réseau Internet (VLAN 10).
+Bases de Données (VLAN 30) : Serveurs de stockage contenant toutes les données transactionnelles, profils clients et informations produits (MySQL/PostgreSQL).
+Bastion (VLAN 50) : Serveur de saut unique pour tout accès administratif distant (protocole SSH exclusif).
+Back-Office (VLAN 40) : Interface opérationnelle dédiée à la gestion des commandes, catalogues et comptes clients.
+Postes d'Administration : Stations de travail physiquement localisées au siège, interconnectées au VLAN 40.
+Infrastructure Réseau : Routeurs, commutateurs et pare-feux assurant la segmentation définie dans la section suivante.
+2. Architecture de Segmentation Réseau (VLANs)
+Le réseau est subdivisé en six zones isolées :
+
+VLAN 10 (Internet) : Point d'entrée des utilisateurs finaux via le protocole HTTPS/TLS. Trafic transitant exclusivement par le port 443.
+VLAN 20 (DMZ Web) : Zone hébergeant les serveurs frontaux exposés. Communication vers le VLAN 30 (base de données) limitée par des ACL strictes aux seuls ports dédiés aux requêtes applicatives légitimes (ex: 3306/TCP pour MySQL).
+VLAN 30 (Base de Données) : Segment isolé uniquement accessible à partir du VLAN 20 pour les connexions applicatives et du VLAN 50 (bastion) pour la maintenance d'urgence.
+VLAN 40 (Administration) : Réseau interne physique avec accès SSH-TLS uniquement via le bastion (VLAN 50). Aucune connectivité directe avec les VLANs Web ou Internet.
+VLAN 50 (Bastion) : Zone tampon sécurisant les accès privilégiés via MFA obligatoire et journalisation complète des sessions.
+VLAN 60 (Sauvegarde) : Réseau dédié aux transferts cryptés (AES-256) des sauvegardes vers des serveurs hors site. Isolation totale des autres flux réseau.
+3. Actifs Logiciels Inclus
+
+Application e-commerce (frontend Angular/backend Python-Django)
+Moteurs de base de données MySQL et Redis (cache)
+Système de paiement (Stripe/PayPal integrés)
+Services de notification (Emails/SMS via Twilio)
+Plateforme de supervision (Prometheus/Grafana)
+Solutions de sauvegarde (BorgBackup/Rclone)
+4. Exclusions Notables
+Les éléments suivants ne relèvent pas du périmètre de cette politique :
+
+Les terminaux clients des utilisateurs finaux
+Les applications mobiles tierces intégrées au site
+Les API externes non contrôlées par l'organisation (ex: transporteurs)
+Les environnements de développement/staging non connectés au réseau de production
+Les serveurs physiques de sauvegarde secondaire chez le fournisseur tiers OVH
+5. Cartographie des Flux Autorisés
+Tous les flux inter-VLANs sont restreints :
+
+Internet (V10) ↔ DMZ Web (V20) : HTTPS/443 uniquement
+DMZ Web (V20) ↔ Base de données (V30) : Ports applicatifs exclusifs (3306, 6379)
+Administration (V40) ↔ Bastion (V50) : SSH/22 avec restriction IP
+Bastion (V50) ↔ Autres zones : Sessions SSH chiffrées sur ports cibles dédiés
+Sauvegarde (V60) ↔ Serveurs : Transfert crypté sur port 2200/TCP via VPN privé
+Les modifications d'architecture doivent être documentées dans le registre des configurations et validées par le responsable sécurité avant implémentation.
+
+--- Fin de la Page 2 ---
+
+Page 3 : Responsabilités Organisationnelles
+Objet
+Cette section définit les rôles clés impliqués dans la sécurité du système d'information du site e-commerce, ainsi que leurs responsabilités spécifiques en matière de protection, de conformité et de gestion des incidents.
+
+1. Responsable Sécurité (Caulin)
+En tant que garant de la sécurité globale du système, Caulin assume les missions suivantes :
+
+Élaborer, mettre à jour annuellement cette PSSI, et valider son adéquation aux besoins opérationnels et réglementaires.
+Pilotage de la surveillance sécurité 24/7, incluant l'analyse des alertes remontées par les outils de supervision (Nagios/Prometheus/SIEM).
+Contrôler la conformité des configurations réseau et applicatives vis-à-vis des exigences de cette politique.
+Gérer les incidents de sécurité majeurs : mise en œuvre des procédures d'urgence, coordination des actions correctives, et organisation des revues post-incidents en lien avec les équipes.
+Valider tout changement critique d'architecture réseau (ex : modification des ACL, création de nouveaux VLANs).
+Organiser et contrôler la réalisation des audits sécurité semestriels menés par des prestataires externes.
+2. Responsable Développement (Adel)
+Adel encadre la sécurisation des applications et du code source selon les prescriptions suivantes :
+
+Vérifier la conformité des développements aux exigences SDL : revues de code hebdomadaires, validation des tests SAST/DAST et implémentation des correctifs de vulnérabilités avant déploiement.
+Maintenir la documentation technique des flux de données sensibles (notamment entre le front-end et la base de données).
+Garantir la suppression des dépendances logicielles non sécurisées remontées par les outils automatisés (ex : Snyk/Dependabot).
+Appliquer la politique de pair-programming et contrôler la rétroactivité des commentaires sur les pull-requests.
+Former les développeurs aux risques spécifiques e-commerce (injections SQL, vol de jetons de session).
+3. Utilisateurs Administratifs
+Tout utilisateur disposant d'accès privilégiés aux systèmes (serveurs, DB, bastion) s'engage à :
+
+Utiliser exclusivement les chemins d'accès autorisés (ex : authentification MFA pour le VLAN 50).
+Respecter la durée maximale d'inactivité (30 min) et verrouiller manuellement les sessions en cas d'absence.
+Signaler immédiatement à Caulin toute anomalie technique suspecte (ex. latence réseau anormale, erreurs serveurs imprévues).
+Ne pas réutiliser leurs accès privilégiés pour des activités extérieures à leur fonction (ex : navigation web personnelle).
+Procédures d'Escalade d'Incidents
+Les processus de remontée d'alertes respectent la hiérarchie suivante :
+
+Première ligne : Utilisateurs identifient ou subissent un incident → Notification immédiate via canal dédié secu-alert@domaine.com.
+Seconde ligne : Caulin analyse les logs et valide l'impact → Attribution du niveau de sévérité (critique/majeur/mineur).
+Tièrce ligne : Intervention nécessaire de l'équipe développeurs (Adel) → Activation selon la nature de l'incident (ex : faille applicative à corriger en urgence).
+Point décisionnel collégial → Si incident critique menaçant les données clients, alerte conjointe Caulin + Adel + Direction.
+Engagements Formels
+Chaque partie signe annuellement :
+
+Une attestation de prise de connaissance de la PSSI.
+Un engagement écrit à respecter les exigences de sécurité liées à leur périmètre fonctionnel.
+La clause de confidentialité relative aux données classifiées "Confidentielles" qu'ils manipulent.
+
+--- Fin de la Page 3 ---
+
+Page 4 : Classification des Données
+
+La classification des données est fondamentale pour garantir des mesures de sécurité proportionnées aux risques. Cette politique définit trois niveaux de sensibilité applicables à l'ensemble des données traitées sur la plateforme e-commerce. Chaque niveau détermine des exigences spécifiques de traitement, de stockage et d'accès.
+
+Niveau « Public »
+Les données classifiées « Public » comprennent toutes les informations destinées à une diffusion publique sans restriction. Leur compromission n'entraînerait aucun préjudice juridique, financier ou réputationnel. Exemples typiques : Contenu statique du site web (descriptions produits génériques, images de vitrine non exclusives), mentions légales, CGV, et tout contenu affiché intentionnellement aux visiteurs sans authentification. Ces données ne nécessitent pas de chiffrement en stockage et peuvent résider sur les serveurs frontaux sans contrôle d'accès renforcé.
+
+Niveau « Interne »
+Ce niveau s'applique aux données à usage opérationnel exclusif, dont la divulgation causerait une gêne modérée sans atteinte critique. Sont inclus : Interfaces back-office (suivi de commandes, gestion de catalogue), données clients anonymisées pour analyse (sans nom, email ou identifiant personnel), rapports de performance internes, et configurations techniques non critiques. Accès réservé aux équipes autorisées via RBAC. Exigences : Chiffrement optionnel pour les données sensibles selon évaluation continue, journalisation des accès.
+
+Niveau « Confidentiel »
+Réservé aux données dont l'exposition entraînerait des préjudices majeurs (sanctions RGPD, pertes financières, atteinte réputationnelle). Englobe : Données personnelles identifiantes (noms, adresses postales, emails non pseudonymisés), moyens de paiement (numéros CB même tokenisés, historiques de transactions), certificats TLS privés, secrets d'authentification (API keys, identifiants administrateur). Protections obligatoires : Chiffrement AES-256 au repos et en transit (TLS 1.2+), accès limité par MFA et RBAC strict, stockage physique partitionné sur VLAN 60. Conservation alignée sur obligations RGPD.
+
+Méthodologie de classification
+L'étiquetage est réalisé suivant un processus validé :
+
+Évaluation initiale par le propriétaire fonctionnel (ex: responsable marketing pour données client, responsable technique pour certificats).
+Vérification semestrielle automatisée via scan des métadonnées (outils : OpenDLP/Snipe-IT).
+Mécanisme d'élévation : Un signalement par tout employé déclenche une revue sous 48h par le RSSI. Exemple : Un fichier CSV exporté contenant des commandes client passe de « Interne » à « Confidentiel » si des adresses email brutes sont détectées.
+Supports visuels : Étiquettes [CONFIDENTIEL] en en-tête des bases de données, préfixe « CONF_ » pour les noms de fichiers.
+Procédures de gestion par niveau :
+
+Collecte : Chaque formulaire de saisie doit afficher un pictogramme indiquant le niveau (ex: icône « œil barré » pour « Confidentiel »).
+Partage : Les données « Confidentielles » nécessitent une autorisation écrite du RSSI pour tout transfert externe (MFA + PGP exigés).
+Destruction : Désanonymisation obligatoire pour les données « Internes » après 3 ans ; Écrasement physique des supports pour « Confidentiel » selon norme NIST SP 800-88.
+Accès : Audit automatisé des permissions trimestriel via Varonis/Netwrix. Violation des règles = suspension immédiate du compte.
+Scénarios pratiques e-commerce :
+
+Page produit : Images (Public), JSON d'inventaire (Interne).
+Base clients : Adresse postale chiffrée (Confidentiel), préférences produits agrégées (Interne).
+Sauvegardes : Backup du VLAN 60 classé « Confidentiel » indépendamment de son contenu.
+Toute donnée non classifiée est traitée par défaut comme « Confidentiel ». Le RSSI effectue une cartographie annuelle des flux appuyée sur des scénarios de threat modeling.
+
+--- Fin de la Page 4 ---
+
+Page 5 : Architecture Réseau Sécurisée
+L'architecture réseau de notre plateforme e-commerce est segmentée en VLANs pour isoler fonctionnellement les flux et limiter les risques de propagation d'incidents. Cette segmentation applique le principe de moindre privilège entre zones.
+
+Flux Fondamentaux et Topologie
+Le trafic Internet (VLAN 10) transite exclusivement par un firewall périmétrique (PFSense/OPNsense) appliquant des règles de filtrage strictes. Celui-ci redirige :
+
+Vers le VLAN 20 (DMZ Web) : Ports HTTP/HTTPS uniquement.
+Les serveurs web (Nginx/Apache) de la DMZ communiquent :
+Au VLAN 30 (Base de données) : Via ACLs restrictives (port 3306 autorisé uniquement depuis IPs des serveurs web). Les requêtes SQL directes externes sont bloquées.
+Au VLAN 50 (Bastion) : Accès en SSH sur port 2222 pour administration d'urgence.
+Isolation des Zones Critiques
+
+Le VLAN 40 (Administration) est isolé physiquement. Toute connexion admin s'effectue exclusivement via saut bastion (VLAN 50). Exemple : Un administrateur doit d'abord s'authentifier sur le bastion avant d'accéder aux serveurs de base de données (VLAN 30) ou back-office.
+Le VLAN 60 (Sauvegarde) opère sur un réseau dédié. Les flux sont chiffrés en AES-256 via WireGuard durant le transit vers le stockage hors site.
+Règles de Séparation des Flux
+Des pares-feu internes (zone-based) matérialisent la séparation :
+
+DMZ → Base de données : Seules les requêtes pré-authentifiées sont relayées.
+Bastion → Administration : Accès limité aux protocoles SSH/SFTP et aux plages horaires de maintenance.
+VLAN Backup : Bloque strictement les connexions entrantes (accès en read-only hors restauration).
+Contrôles de Trame Inter-VLANs
+Le commutateur central applique :
+
+Du filtrage DHCP snooping pour prévenir les attaques ARP.
+Du BPDU guard contre les boucles Spanning-Tree malveillantes.
+Une isolation des ports non utilisés (shutdown avec Port Security).
+
+Schéma de Flux Autorisés (voir document schéma réseau)
+Internet (VLAN 10) → Firewall → DMZ (VLAN 20) → Base de données (VLAN 30 : accès conditionnel)
+
+Bastion (VLAN 50) → Administration (VLAN 40 : tunnel SSH)
+Sauvegarde (VLAN 60 : flux chiffré synchrone)
+
+Toute architecture ou modification doit être validée par le Responsable Sécurité (Caulin). La documentation détaillée des ACLs est conservée dans le référentiel Git dédié à l'infrastructure.
+
+--- Fin de la Page 5 ---
+
+Page 6 : Gestion des Identités et Accès
+Objectif
+Cette politique établit les règles de contrôle d'accès aux systèmes critiques de la plateforme e-commerce. Elle vise à prévenir les accès non autorisés grâce à un modèle strict de gestion des identités et privilèges, conforme au référentiel RGPD et PCI DSS.
+
+1. Workflow de Gestion des Comptes
+
+Création de compte :
+Toute demande de nouveau compte administratif doit être validée par écrit par le responsable sécurité ou le responsable hiérarchique direct.
+Les comptes sont créés avec le principe du moindre privilège. Un justificatif métier signé est exigé pour les droits étendus.
+Modification des droits :
+Toute élévation temporaire de privilèges exige une double validation (sécurité + hiérarchie).
+Révocation de compte :
+Désactivation immédiate à la détection de comportements suspects.
+Suppression automatique dans les 24h après un départ d'employé ou un changement de fonction.
+Audit trimestriel pour identifier les comptes orphelins ou obsolètes.
+2. Authentification Multi-Facteurs (MFA)
+
+Obligation : Activée sans exception pour :
+Tous les comptes administrateurs (serveurs, BDD, bastion).
+Utilisateurs avec accès aux données clients/paiements.
+Méthodes autorisées :
+Protocole TOTP (Google Authenticator, Authy) pour les équipes internes.
+Clés FIDO2 U2F pour les accès sensibles (administration réseau, sauvegardes).
+Les SMS sont interdits pour les nouveaux comptes (vulnérabilité SIM swapping).
+3. Politique de Session
+
+Durée maximale d'inactivité :
+Session verrouillée automatiquement après 30 minutes d'inactivité sur l'interface back-office et les outils d'administration.
+Obligation de reconnexion complète avec MFA après déverrouillage.
+Protection contre le bruteforce :
+Verrouillage du compte après 5 tentatives infructueuses de connexion.
+Délai automatique de déblocage : 1 heure ou intervention manuelle de l'équipe sécurité.
+Alerte immédiate du SIEM en cas d'attaque de type "brute force".
+4. Contrôle des Privilèges (RBAC)
+
+Hiérarchie des rôles :
+Niveau "Lecture seule" : Accès consultatif sans modification (ex : support client).
+Niveau "Opérateur" : Actions limitées à des tâches métier spécifiques (ex : gestion des stocks).
+Niveau "Admin" : Droits complets sur son périmètre (validations mensuelles obligatoires).
+Attribution et supervision :
+Revue semestrielle par le responsable sécurité de tous les droits "Admin".
+Journalisation des actions critiques (modification ACL, accès données clients).
+5. Procédures d'Audit
+
+Contrôle bimestriel :
+Vérification de la conformité des mots de passe (longueur 12+, non-réutilisation).
+Traçage des connexions hors heures ouvrables ou depuis adresses IP suspectes.
+Documentation :
+Rapport de revue intégrant : Nom du compte, Droits associés, Dernières activités, Anomalies détectées.
+Archivage crypté des journaux d'accès pendant 15 mois.
+Protections complémentaires
+
+Interdiction formelle des comptes génériques (type "admin-prod").
+Renouvellement obligatoire des mots de passe pour les comptes à privilèges tous les 90 jours.
+Alerte automatique en cas d'accès simultané depuis deux géolocalisations incompatibles.
+
+--- Fin de la Page 6 ---
+
+Page 7 : Sécurité du Développement
+Cycle de Vie de Développement Sécurisé (SDL)
+Tout développement logiciel pour la plateforme e-commerce suit un cycle de vie sécurisé structuré en six phases obligatoires. Lors de la phase de conception, des revues de menaces formelles documentent les risques (exposition de données clients, injections). La phase de codage implique un pair-programming systématique pour tout code soumis au référentiel Git. Lors des revues de pull requests, deux développeurs distincts de l'auteur doivent valider chaque ligne de code contre une checklist de sécurité pré-approuvée validée par Adel.
+
+Trois couches de tests automatisés sont déclenchées via la pipeline CI/CD lors de l'intégration du code :
+
+Analyse statique SAST (avec vérification OWASP Top 10 via des outils comme SonarQube) incluant le scanning des secrets matériels (clés API, mots de passe).
+Analyse dynamique DAST sur l'environnement de pré-production détectant les vulnérabilités HTTP (CSRF, XSS).
+Tests de fuzzing dirigés simulant des entrées malveillantes distordues dans les champs client payment et pages de commande.
+Revues Collaboratives et Gestion des Dépendances
+Aucune modification ne peut être fusionnée dans la branche main sans une revue de pull request documentée avec approbations explicites. Les revues techniques portent obligatoirement sur l'absence de vulnérabilités connues et la conformité aux normes RGPD (anonymisation) et PCI DSS (moyens de paiement). Des séances de peer-review hebdomadaires sont conduites pour les modifications sensibles traitant des données clients ou des transactions.
+
+Les dépendances logicielles (frameworks tiers, librairies) sont contrôlées trimestriellement via des scanners SCA comme OWASP Dependency-Check. Toute dépendance présentant une CVE critique (> score CVSS 7.0) doit être mise à jour dans un délai de 48 heures. Une liste blanche de paquets vérifiés est maintenue, interdisant notamment l'usage de bibliothèques non supportées ou non signées.
+
+Validation Pré-Déploiement et Documentation
+Huit jours avant chaque déploiement en production, un rapport complet est publié comprenant :
+
+Les résultats détaillés des scans SAST/DAST avec statut de résolution des vulnérabilités.
+Un certificat de signature numérique validant l'authenticité des binaires déployés.
+La déclaration de conformité du code aux clauses de confidentialité e-commerce.
+Un dossier de sécurité archivé dans le système de gestion des documents recense les décisions techniques (exclusion de composants, patchs d'urgence) pour chaque version. Tout code non conforme entraîne la suspension immédiate de la promotion vers la production jusqu'au tri des risques par le responsable sécurité.
+
+--- Fin de la Page 7 ---
+
+Page 8 : Politique de Durcissement des Systèmes
+La présente section établit les exigences de durcissement des infrastructures critiques de la plateforme e-commerce selon les normes industrielles et les bonnes pratiques de sécurité. L’objectif est de réduire la surface d’attaque des systèmes exposés, en particulier les serveurs web et bases de données hébergeant des données clients sensibles.
+
+1. Désactivation des Services Non Essentiels
+Tous les services, ports et protocoles non requis pour le bon fonctionnement de l’application sont immédiatement désactivés. Cette mesure s’applique systématiquement aux environnements Linux et Windows :
+
+Interdiction absolue des protocoles non chiffrés (Telnet, FTP, SNMPv1/v2c, HTTP non TLS) en interne ou externe.
+Désactivation des comptes utilisateurs par défaut (ex: guest, admin) et suppression des logiciels inutilisés (compilateurs, outils de debug).
+Verrouillage des ports réseaux via iptables (Linux) ou Pare-feu Windows, limitant les connexions aux adresses IP approuvées uniquement.
+2. Benchmark CIS et Configuration Sécurisée
+Les configurations systèmes doivent se conformer aux CIS Benchmarks dans leurs versions les plus récentes :
+
+Serveurs Linux (CentOS/Ubuntu) :
+Exigence de renforcement du noyau (sysctl protections ASLR/SMEP), restriction des accès /proc, et quotas d’UID 0.
+Partitionnement /tmp avec options noexec,nosuid et rotation hebdomadaire automatisée des logs système.
+Serveurs Windows :
+Activation du contrôle UAC (niveau "Always Notify"), désactivation de SMBv1, et restriction des politiques NTLM.
+Chiffrement obligatoire des disques via BitLocker avec clés TPM sous supervision.
+3. Mises à Jour Automatisées et Contrôlées
+Un système automatisé de patch management corrige les vulnérabilités sans interruption des services e-commerce :
+
+Déploiement en 24 heures maximum pour les correctifs aux risques "critiques" (CVSS ≥ 9.0), après tests préalables sur un environnement similaire non productif.
+Fenêtres de maintenance hebdomadaires dédiées (vendredi 01h-03h) excluant toute transaction client à faible activité.
+Exigence de validation cryptographique (PKI interne) des paquets avant installation pour éviter les corruptions logicielles.
+4. Monitorage Continue de la Conformité
+Des outils automatisés (type OpenSCAP/Tenable) contrôlent quotidiennement le respect des consignes :
+
+Scans journaliers comparant la configuration des systèmes aux référentiels CIS avec rapport d’écarts transmis à Caulin (Responsable sécurité).
+Blocage réseau immédiat pour tout serveur présentant un écart corrigible dépassant 72 heures ou un risque imminent (ex: service RDP exposé publiquement).
+Implémentation Exemple sur Serveurs Web
+Dans le VLAN 20 (DMZ web), un serveur Apache doit :
+
+Désactiver les modules non critiques (mod_autoindex, mod_imap, mod_info)
+Définir des en-têtes X-Frame-Options: DENY et Content-Security-Policy
+Plonger dans un environnement « chroot » via chrootkit pour l’isolation des processus
+Activer mod_security avec profil OWASP CRS pour bloquer les charges SQL/CMDi
+Sanctions pour Non-Conformité
+Tout déploiement sans validation préalable des exigences CIS entraîne :
+
+Retrait immédiat de l’infrastructure côté réseau firewall.
+Revue corrective obligatoire avec Adel (Responsable développement) et inscription au registre des dérogations sécurités.
+
+--- Fin de la Page 8 ---
+
+Page 9 : Politique de Sauvegarde
+
+Cette politique définit les exigences de sauvegarde des données critiques de la plateforme e-commerce afin d'assurer leur récupération après incident matériel, logiciel ou lié à une cyberattaque. Elle s'applique à l'ensemble des infrastructures couvertes par le périmètre et garantit la résilience des données clients, transactionnelles et de configuration.
+
+1. Stratégie de Sauvegarde 3-2-1
+Les sauvegardes suiveront le modèle 3-2-1 : trois copies des données sont maintenues en permanence, stockées sur au moins deux supports distincts (ex. disques locaux + bandes LTO), avec une copie conservée hors site (site sécurisé à 20 km minimum). Les sauvegardes hors site sont transférées sur VLAN 60 dédié et isolé via des connexions sécurisées par SSH.
+
+2. Fréquences des Sauvegardes
+Des sauvegardes incrémentales sont exécutées quotidiennement à 2h00 (UTC), capturant uniquement les modifications des dernières 24 heures pour limiter l'impact sur les performances systèmes.
+Une sauvegarde complète est effectuée hebdomadairement le dimanche à 1h00 (UTC), incluant l'ensemble des bases de données, fichiers de configuration et métadonnées critiques.
+Les sauvegardes de base de données utilisent le principe de dump différentiel pour garantir la cohérence transactionnelle sans interruption de service.
+
+3. Chiffrement et Intégrité
+Toutes les sauvegardes sont chiffrées à l'aide de l'algorithme AES-256 en mode CBC avant leur transfert. Une clé maître gérée par le responsable sécurité (Caulin) est nécessaire pour le déchiffrement. Les blobs de sauvegarde sont signés numériquement via RSA 2048 bits pour valider leur intégrité, accompagnés systématiquement d'un hash SHA-256. Les clés de chiffrement sont stockées dans un HSM physique situé en zone sécurisée VLAN 40.
+
+4. Conservation des Données
+Les sauvegardes quotidiennes sont conservées 30 jours minimum. Les sauvegardes hebdomadaires sont archivées pendant 12 mois. Une copie mensuelle dédiée à la conservation à long terme (7 ans) est chiffrée et envoyée hors site via protocole SFTP sécurisé, conformément aux obligations légales de facturation.
+
+5. Procédures de Restauration
+Un test de restauration est mené trimestriellement selon le processus suivant :
+
+Sélection aléatoire d'un dataset sauvegardé dans les 90 jours.
+Validation de l'intégrité via SHA-256 et signature numérique.
+Déchiffrement à l'aide des clés HSM et restauration dans un environnement isolé VLAN 40.
+Contrôle d'intégrité fonctionnelle et cohérence des données par l'équipe technique.
+Les résultats de chaque test, incluant les temps de restauration, taux de succès et écarts documentés, sont archivés dans le système de tickets ITSM et présentés lors des comités de sécurité.
+
+6. Documentation et Accès
+Les procédures détaillées de sauvegarde et de restauration, incluant les commandes système, chemins d'accès et workflows d'urgence sont documentées dans le WIKI interne sous chapitre "Procedures_Sauvegarde". L'accès au VLAN 60 est restreint : seuls les administrateurs systèmes disposant de droits pré-validés par Caulin y sont autorisés via authentification MFA obligatoire. Une double authentification (par token physique + validation AD) est requise pour toute opération de suppression de sauvegarde.
+
+--- Fin de la Page 9 ---
+
+Page 10 : Surveillance et Journalisation
+Principe Fondamental
+L'ensemble des systèmes, applications et réseaux impliqués dans la plateforme e-commerce doit faire l'objet d'une journalisation centralisée et d'une surveillance continue. Cette démarche permet de détecter les incidents de sécurité, les anomalies opérationnelles et de fournir des preuves pour les investigations forensiques.
+
+Centralisation des Journaux (SIEM)
+Toutes les sources de logs doivent être redirigées vers une solution SIEM (Security Information and Event Management), configurée pour corréler les événements :
+
+Sources couvertes : Logs système Linux/Windows (via Syslog et agents dédiés), journaux des serveurs web (accès/erreurs Nginx), requêtes MySQL, activités de bastion (SSH), et métriques de conteneurs Docker.
+Protocole d'envoi sécurisé : Utilisation de TLS pour le transport des logs vers le SIEM. Les connexions doivent être authentifiées par certificats X.509.
+Filtrage de pertinence : Exclusion des événements de bas niveau (ex: logs de débogage applicatifs) pour optimiser le stockage. Seuls les logs critiques sont traités.
+Types d'Alertes Automatisées
+Le SIEM génère des alertes en temps réel selon des règles pré-établies :
+
+Suspicion d'intrusion :
+Connexions SSH échouées (> 2 tentatives/min depuis une IP unique).
+Transferts de fichiers volumineux depuis la DMZ vers l'extérieur.
+Anomalies métier :
+Création de sessions utilisateur simultanées sur > 3 pays différents.
+Modifications non autorisées sur les tables clients/commandes (SQL DELETE massif).
+Dégradations de service :
+Erreurs serveur 5xx pendant plus de 30 secondes sur > 50 requêtes consécutives.
+Utilisation CPU > 95% pendant 5 minutes sur les serveurs de base de données (VLAN 30).
+Critères de Rétention des Logs
+
+Logs de sécurité critiques : Tentatives d'accès administrateur, modifications sur les données clients, accès aux sauvegardes. Conservation obligatoire de 90 jours minimum dans le SIEM.
+Logs opérationnels : Disponibilité des services, accès applicatifs. Conservation limitée à 30 jours, extensions possibles pendant les investigations d'incidents.
+Masquage des Données Sensibles
+Les données sensibles en transit dans les logs sont systématiquement pseudonymïsées :
+
+Redaction RGPD :
+Masquage des adresses email client (ex: email@domain.fr → ███████@domain.fr).
+Chiffrement irréversible des numéros de carte bancaire valides dans les logs applicatifs.
+Exemption technique : Les logs des VLANs isolés (Admin VLAN 40, Backup VLAN 60) ne suivent pas cette règle sous protocoles cryptés de bout en bout.
+Processus de Revues Techniques
+
+Révision hebdomadaire : Audits manuels des logs corrélés par les administrateurs sécurité. Focus sur :
+Activité inexpliquée des comptes à privilèges.
+Échecs récurrents de sauvegarde signalés via le SIEM.
+Contrôle de conformité mensuel : Vérification automatisée via scripts Python dans le SIEM :
+Confirmation que 100% des systèmes remontent leurs logs au SIEM.
+Détection des lacunes dans la durée de conservation des logs critiques.
+
+Exemple d'Application Préventive
+Lors d'une tentative d'attaque DDoS (VLAN 10 détectée par le trafic > 95Gbps), le SIEM a déclenché :
+
+Alerte vers le SOC en moins de 60 secondes.
+Analyse automatique des journaux des firewalls via requête KQL (trafic SYN flood).
+Isolation du VLAN 10 via API cloud (+ logs de cette action intégrés aux archives du SIEM).
+
+--- Fin de la Page 10 ---
+
+Page 11 : Gestion des Incidents
+Cadre général
+Tout événement compromettant la confidentialité, l'intégrité ou la disponibilité des systèmes ou données du site e-commerce est considéré comme incident de sécurité. Cette section définit le cadre de réponse pour les scénarios suivants : compromission de données clients, attaques sur les systèmes de paiement, accès non autorisés au back-office, dénis de service ciblés, exploitation de vulnérabilités critiques, ou fuites de données personnelles. La réactivité est primordiale pour limiter l'impact opérationnel et juridique.
+
+Définitions clés
+Incident critique : Activité malveillante ayant causé ou risquant de causer une indisponibilité majeure (>1h service), une fuite de données personnelles ou financières, ou une altération des systèmes centraux.
+Incident majeur : Compromission détectée sans impact immédiat avéré (ex. scan de vulnérabilités anormal).
+Équipe d'intervention : Cellule SWAT composée du responsable sécurité (lead), responsable développement, administrateur système, et référent juridique RGPD.
+Workflow de réponse
+Phase 1 : Détection et alerte
+
+Toute détection humaine (employé ou client via contact@site.com) ou technique (alertes SIEM/Nagios) déclenche immédiatement un ticket avec tag "[SECU-URGENT]" dans le système de gestion interne.
+Critères déclencheurs prioritaires :
+Erreurs système 5xx en hausse >500%/min
+Activité basée sur règles Suricata sur VLAN 30
+Tentatives d'accès SSH non MFA sur VLAN 40/50
+Notification audio-visuelle en salle technique et SMS groupé aux intervenants sous 10 minutes maximum.
+Phase 2 : Investigation initiale
+Sous la direction du responsable sécurité :
+
+Isoler les systèmes affectés (déconnexion réseau sans arrêt physique sauf risque systémique)
+Capturer preuves volatiles avant traitement : RAM, processus actifs via LiME, journaux systèmes
+Cartographie de l'impact initial avec focus sur :
+Pénétrations réseau via VLAN 20/30
+Exfiltration de données clients (logs DB)
+Altération des médias de paiement
+Documentation horodatée stricte dans le registre central chiffré.
+Phase 3 : Contenir et éradiquer
+
+Neutralisation des points d'entrée confirmés (ex. révocation immédiate des sessions utilisateurs suspects, blocage IP au firewall périmétrique)
+Pour compromission applicative : Mise en quarantaine de l'environnement DEV concerné, suspension temporaire du pipeline CI/CD.
+Pour fuite présumée de données : Réinitialisation générale des accès privilégiés et rotation des clés KMS.
+Durée maximale d'endiguement : 1h pour les incidents critiques.
+Phase 4 : Rétablissement
+Recette obligatoire avant retour en service :
+
+Rebuild des systèmes concernés à partir d'images durcies validées
+Restauration des données depuis sauvegardes pré-incident via VLAN 60
+Vérification d'intégrité via comparaison SHA-256 des binaires
+Test de charge partiel avant réintégration réseau, avec journalisation exhaustive.
+Phase 5 : Revue post-incident
+Dans les 72h après résolution :
+
+Analyse causale en atelier avec diagrammes 5 Why + Fishbone
+Évaluation des impacts réels : clients affectés, coût financier, durée exacte de dégradation
+Proposition corrective dans un délai contraint (ex. patch dans 48h pour vulnérabilités critiques)
+Validation par le responsable RGPD des procédures de notification externe appliquées.
+Procédures de communication
+Escalade interne :
+
+Niveau 1 (détection) : Notification à l'équipe sécurité via Signal/Bot Mattermost
+Niveau 2 (confirmation incident) : Alerte directe Caulin/Adel
+Niveau 3 (critique) : Conf-call avec direction générale dans les 30 minutes
+Notification externe obligatoire :
+
+CNIL sous 72h dès fuite données personnelles confirmée
+Prestataires de paiement dans l'heure pour incidents financiers
+Clients concernés via canal dédié chiffré après validation juriste
+Fournisseurs liés à la chaîne d'incident dans les 24h.
+Registre des incidents
+Document central conservé 3 ans, structuré par :
+
+Identifiant unique : INC-[YYYYMMDD]-[ID_HEX]
+Horodatages précis : détection/confinement/résolution
+Type technique classé (OWASP Top 10, CWE spécifique)
+Systèmes/VLANs atteints avec niveau classification données
+Mesures correctives liées à des tickets Jira
+Indicateur de conformité RGPD/PCI DSS
+Champs obligatoires par incident :
+
+Sources de détection primaire (humaine/surveillance)
+Preuves matérielles stockées séparément
+Copie exacte des notifications externes envoyées
+Désignation du propriétaire du plan correctif
+Améliorations continues
+Drill trimestriel sur scénarios réalistes : Ex: Attaque ransomwares sur serveurs backups via VLAN 60
+Mise à jour annuelle des playbooks d'incidents
+Automatisation des captures de preuves via scripts bash de forensic
+Intégration des enseignements dans la formation sensibilisation
+
+--- Fin de la Page 11 ---
+
+Page 12 : Conformité RGPD et Normes Sectorielles
+
+Cadre Réglementaire
+Cette politique intègre strictement les exigences du Règlement Général sur la Protection des Données (RGPD) et des standards de l'industrie des paiements. L'objectif est de garantir la conformité légale tout en assurant la confiance des clients.
+
+Application du RGPD
+Collecte et Traitement des Données
+
+Les données personnelles (adresses, coordonnées, historiques d'achat) sont collectées uniquement avec le consentement explicite des utilisateurs, obtenu via une case à cocher active lors de l'inscription.
+Le traitement est limité aux finalités déclarées : traitement des commandes, service client et personnalisation des recommandations produits.
+Droits des Utilisateurs
+
+Tout utilisateur peut exercer ses droits via le portail client dédié :
+Accès : Obtenir une copie des données personnelles stockées sous 72 heures.
+Rectification : Modifier les informations via le profil utilisateur.
+Erasure : Demander une suppression définitive des données hors contraintes légales.
+Une adresse email spécifique (privacy@entreprise.com) est dédiée aux demandes RGPD, avec réponse dans un délai maximum de 5 jours ouvrés.
+Conservation et Minimisation
+
+Les données clients sont conservées 3 ans après la dernière connexion. Les données de carte de paiement sont immédiatement détruites après transaction via notre PSP certifié PCI DSS.
+Les logs techniques ne conservent pas d'identifiants chiffrés plus de 30 jours.
+Conformité PCI DSS (Payment Card Industry Data Security Standard)
+Exigences Clés Intégrées
+
+Aucun stockage des numéros de carte bruts sur nos systèmes. Utilisation exclusive de tokens générés par notre prestataire de paiement agréé niveau 1 (ex: Stripe/PayPal).
+Systèmes de paiement isolés dans le VLAN 30 (Base de Données) avec :
+Chiffrement AES-256 des données sensibles au repos.
+Masquage dynamique des 12 premiers chiffres dans les logs applicatifs.
+Accès restreint aux données de paiement : seuls les administrateurs de la plateforme et du PSP disposent de droits spécifiques, contrôlés via RBAC et MFA.
+Contrôles Réguliers
+
+Scans trimestriels ASV (Approved Scanning Vendor) pour valider la conformité.
+Audit annuel par un QSA (Qualified Security Assessor).
+Gestion des Violations et Notifications
+Procédure d'Alerte RGPD
+
+Identification d'une violation : déclenchement immédiat du plan d'urgence supervisé par le responsable sécurité.
+Notification à la CNIL sous 48 heures si impact sur données personnelles.
+Communication aux clients affectés dans les détails requis par l’Article 34 du RGPD.
+Enregistrement des Incidents
+
+Un registre exhaustif documente :
+Nature de la violation et catégories de données exposées.
+Nombre approximatif de personnes concernées.
+Mesures correctives appliquées.
+Sous-Traitance et Responsabilités Partagées
+Engagements Contractuels
+
+Tiers traitant des données (ex. hébergeur, solution d'emailing) doit fournir :
+Certification PCI DSS ou ISO 27001 valide.
+Accord préalable pour les audits de sécurité annuels.
+Clauses contractuelles spécifiques sur la localisation UE des données et exigences de neutralité carbone validées par notre DPO.
+Formation Obligatoire
+
+Module RGPD/PCI DSS intégré à l'initiation des employés et actualisé annuellement.
+Quiz pratiques sur les scénarios de breach de données et procédures de notification.
+Contrôles Continus
+Mécanismes de Vérification
+
+Revue trimestrielle automatisée des traitements de données via notre logiciel de compliance RGPD.
+Tests semestriels d’intrusion ciblant les systèmes de paiement par un prestataire indépendant.
+Points de Vigilance
+
+Veille légale mensuelle sur les évolutions du RGPD et PCI DSS via abonnements au Conseil National Informaticien et Libertés.
+Intégration obligatoire des changements normatifs dans la PSSI lors des mises à jour annuelles.
+
+--- Fin de la Page 12 ---
+
+Page 13 : Plan de Continuité d’Activité (PCA)
+1. Objectifs du Plan de Continuité
+Garantir la disponibilité ininterrompue du site e-commerce face à des incidents majeurs (défaillances matérielles, cyberattaques, sinistres physiques). Le PCA vise à maintenir les opérations commerciales essentielles avec une interruption maximale tolérée de 43.8 minutes par mois, conformément au SLA de 99.5%.
+
+2. Mesures Techniques de Haute Disponibilité
+
+Infrastructure Redondante :
+
+Double cluster de serveurs web en configuration active-active (load balancing via Nginx), permettant la bascule automatique en moins de 60 secondes.
+Stockage des bases de données en RAID 1 avec synchronisation temps réel sur deux nœuds physiques distincts.
+Répartition géographique des instances critiques sur deux centres de données distants de 50 km minimum.
+Supervision Proactive :
+
+Contrôle permanant via Prometheus/Grafana sur trois niveaux :
+→ Disque (espace libre < 20% déclenche alerte P1)
+→ Réseau (latence > 200ms flaguée comme anomalie)
+→ Services applicatifs (HTTP 5xx > 1%/minute amorce bascule)
+3. Scénarios de Bascule Pré-définis
+
+Incident Serveur Principal :
+Transfert automatique du trafic vers le site miroir via redirection DNS géolocalisée. Les sessions utilisateurs sont préservées grâce à la réplication mémoire Redis cross-DC.
+
+Attaque DDoS Niveau 4 :
+Activation immédiate du scrubbing via le fournisseur de bande passante avec filtrage BGP, priorisation automatique des flux clients identifiés (> 3 achats historiques).
+
+Corruption de Données :
+Restauration depuis les hot-backups cryptés situés hors site avec point de récupération garanti à moins de 15 minutes. Validation de l’intégrité via checksum SHA-256 avant remise en ligne.
+
+4. Compensations Opérationnelles pour Rupture de SLA
+En cas d’indisponibilité dépassant les seuils contractuels :
+
+Crédit automatisé de 10% du panier moyen mensuel pour les clients impactés.
+Replay des transactions par le système de file d’attente Kafka assurant qu’aucune commande n’est perdue.
+Escalade immédiate vers le directeur technique après 15 minutes d’indisponibilité (procédure PIR-001).
+5. Tests et Validation du PCA
+
+Exercices trimestriels "Cut the Cord" simulant :
+→ Panne complète d’un data-center (bascule sur un site secondaire en < 5 min).
+→ Injection massive de faux commandes (validation des mécanismes de résilience).
+Audit semestriel de conformité par un tiers indépendant, vérifiant notamment :
+→ Les capacités opérationnelles post-bascule (> 80% du débit nominal exigé)
+→ Le chiffrement persistant lors des migrations (AES-256 validé via logs hardware).
+Ce plan intègre systématiquement les retours d’expérience des incidents pour optimiser les seuils d’intervention. La matrice RACI associée attribue au Responsable Sécurité la validation des procédures, et à l’équipe DevOps l’exécution des scénarios.
+
+--- Fin de la Page 13 ---
+
+Page 14 : Sensibilisation et Formation
+La sécurité des systèmes est une responsabilité partagée. Cette section décrit les programmes obligatoires pour former et sensibiliser l'ensemble du personnel aux enjeux de cybersécurité propres à notre plateforme e-commerce, avec un accent sur les risques opérationnels quotidiens.
+
+1. Programme de Formation Annuel
+Formation initiale : Dispensée sous 5 jours ouvrables à toute nouvelle recette.
+Recyclage annuel : Session obligatoire pour l'ensemble des collaborateurs chaque année civile.
+Thèmes principaux :
+
+Cybermenaces courantes en e-commerce :
+Reconnaissance des attaques de phishing ciblées (emails frauduleux imitant des commandes clients).
+Identification des tentatives de fraude au support client (social engineering).
+Protection des données RGPD :
+Bonnes pratiques de traitement des données personnelles (masquage systématique des numéros de carte).
+Procédures de réponse aux demandes d'exercice des droits (droit à l'oubli, accès aux données).
+Gestion sécurisée des accès :
+Règles d'hygiène des mots de passe pour les comptes back-office.
+Risques associés aux terminaux personnels (interdiction d'accès admin depuis un smartphone non sécurisé).
+Toutes les formations incluent des quiz pratiques avec exigence de 85% de réussite pour validation. Les supports pédagogiques sont accessibles sur la plateforme LMS interne.
+
+2. Exercices Simulés Trimestriels
+Scénarios concrets en e-commerce :
+Simulation d'une fuite de données clients déclenchée par un mail de phishing.
+Gestion d'une attaque par déni de service (DDoS) pendant une période de fortes ventes (ex. Black Friday).
+Modalités d'exécution :
+Session "table-top" de 90 minutes animée par le responsable sécurité.
+Attribution de rôles (responsable IT, support client, direction) avec feuille de route d'urgence.
+Débriefing post-exercice documentant 3 points d'amélioration opérationnels maximum.
+La participation est obligatoire pour les équipes IT, support et marketing.
+3. Procédures de Signalement
+Tout utilisateur suspectant une compromission doit IMMÉDIATEMENT :
+
+Signalement primaire :
+Notifier l'équipe sécurité via l'outil dédié (#urgent-sec sur RocketChat).
+Joindre tout élément de preuve (copie d'email, capture d'écran, logs système pertinents).
+Consignes post-incident :
+Ne jamais réinitialiser un compte suspect sans accord préalable de la sécurité.
+Documenter manuellement les actions suspectes (exemple : "09:25 - notification de paiement anormale sur l'admin boutique").
+4. Sensibilisation Continue
+Campagnes mensuelles thématisées : Envoi par email de "Fiches Vigilance" incluant :
+Exemple réel d'attaque récente sur une boutique concurrente.
+Astuce pratique chiffrée (ex. "90% des attaques évitées grâce à la vérification des URL").
+Portail dédié : Intranet contenant :
+Dépôt central des copies de sauvegarde des formations.
+Base documentaire des incidents précédents (anonymisés).
+Moteur de recherche des procédures RGPD par cas d'usage.
+Mécanisme de contrôle : Audit aléatoire trimestriel via des faux incidents tests (ex. envoi de faux emails de phishing) pour mesurer le taux de report effectif.
+
+Obligations contractuelles : Le non-respect répété de ce programme (ex. échec au quiz ou non-participation aux exercices) peut déclencher une restriction temporaire d'accès après 2 avertissements formalisés par écrit.
+
+--- Fin de la Page 14 ---
+
+Page 15 : Révision & Audit
+1. Objectif
+La présente section définit les processus formels de révision et d’audit de la Politique de Sécurité des Systèmes d’Information (PSSI). Ces mécanismes garantissent que la politique reste adaptée à l’évolution des menaces, des réglementations et des spécificités opérationnelles de la plateforme e-commerce, tout en assurant une traçabilité exhaustive des modifications apportées.
+
+2. Calendrier des audits de sécurité
+Un audit externe indépendant est réalisé deux fois par an :
+
+Au premier semestre (janvier-juin), avant le 31 juillet.
+Au second semestre (juillet-décembre), avant le 31 janvier.
+Ces audits couvrent :
+Les contrôles techniques (pare-feu, durcissement des serveurs, règles réseau).
+La conformité réglementaire (RGPD, PCIDSS).
+L’efficacité des procédures de sauvegarde et de PRA.
+Les écarts identifiés font l’objet d’un plan d’action sous 15 jours, assigné au responsable sécurité (Caulin) et au responsable développement (Adel).
+3. Révision annuelle de la PSSI
+La politique est révisée systématiquement chaque année lors du premier trimestre, via un processus structuré :
+
+Analyse des incidents de sécurité survenus dans l’année.
+Vérification de l’adéquation avec les nouvelles exigences légales (ex : mise à jour du RGPD).
+Évaluation des retours d’expérience des équipes techniques.
+Intégration des recommandations issues des audits externes.
+Une version consolidée est publiée avant le 31 mars et transmise à toutes les parties prenantes.
+4. Déclencheurs exceptionnels de mise à jour
+Des révisions intermédiaires sont lancées dans les cas suivants :
+
+Après un incident majeur (ex : fuite de données, compromission système).
+Suite à une évolution significative de l’architecture (nouveau VLAN, changement d’infrastructure).
+En cas de modification réglementaire impactant directement le e-commerce (ex : normes de paiement).
+Ces mises à jour doivent être finalisées sous 30 jours et documentées dans le registre des versions.
+5. Procédure de modification et versionnage
+Toute proposition de modification doit inclure :
+
+Une justification basée sur des risques identifiés ou des exigences réglementaires.
+Une analyse d’impact technique.
+La liste des sections de la PSSI concernées.
+Les changements sont numérotés selon le système [Majeure].[Mineure].[Corrective] (ex : v2.1.3). Un historique détaillé est conservé, précisant pour chaque version : la date, les responsables et la nature des modifications.
+6. Critères d’acceptation d’un audit
+Un audit est considéré comme satisfaisant si :
+
+Les écrans de sécurité critiques sont résolus à 100 %.
+Les écrans majeurs disposent d’un plan de correction documenté avec des délais valides.
+Les pistes d’amélioration sont intégrées à la feuille de route de sécurité.
+Le responsable sécurité valide la clôture via un rapport signé transmis à la direction.
+7. Diffusion et sensibilisation aux mises à jour
+Les nouvelles versions de la PSSI sont :
+
+Publiées sur l’espace dédié du réseau administratif (VLAN 40) dans les 5 jours ouvrés après approbation.
+Annoncées par email aux équipes concernées (sécurité, développement, administrateurs), accompagnées d’un résumé des changements clés.
+Incluses dans le programme de formation annuel lorsque des modifications opérationnelles impactent les utilisateurs.
+8. Archivage et traçabilité documentaire
+
+L’ensemble des versions de la PSSI est conservé sur le VLAN 60 (sauvegarde chiffrée) pendant 5 ans.
+Chaque audit génère un dossier complet : compte-rendu, preuves techniques, plans d’action.
+Un registre centralisé (comité sécurité), accessible uniquement via le bastion (VLAN 50), référence toutes les révisions et leurs liens avec les incidents ou audits déclencheurs.
+Annexe de la page 15
+Modèle de Registre des Révisions PSSI
+Version : v3.0.1
+Date : 22/06/2025
+Responsables : Caulin (Sécurité), Adel (Développement)
+Modifications apportées :
+
+Ajout des règles PCIDSS v4.0 sur le traitement des paiements.
+Mise à jour de la politique de sauvegarde (fréquence des incrémentielles passée à horaire).
+Clarification des procédures de réponse aux incidents suite au retour d’expérience de l’incident #INC-2024-07.
+
+--- Fin de la Page 15 ---
